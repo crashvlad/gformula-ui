@@ -7,10 +7,10 @@ import {
   Smile,
 } from 'lucide-react';
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-const LOCAL_URL = 'http://localhost:8080';
-const PROD_URL = 'https://growth-formula-api.onrender.com';
+export const LOCAL_URL = 'http://localhost:8080';
+export const PROD_URL = 'https://growth-formula-api.onrender.com';
 
 export const BASE_URL = IS_PRODUCTION ? PROD_URL : LOCAL_URL;
 
@@ -21,6 +21,16 @@ export const SALES_PROCESS_IMPACT_OPTIONS = [
   { id: 4, value: 'VIRAL', label: 'VIRAL' },
   { id: 5, value: 'MONETIZATION', label: 'MONETIZACIÓN' },
 ];
+
+export const USER_ACCESS_LEVEL_OPTIONS = [
+  { id: 1, value: 'ACCOUNT_ADMIN', label: 'ADMINISTRADOR' },
+  { id: 2, value: 'ACCOUNT_EDITOR', label: 'USUARIO' },
+];
+
+export const USER_ACCESS_LEVEL_DICTIONARY: { [key: string]: string } = {
+  ACCOUNT_ADMIN: 'ADMINISTRADOR',
+  ACCOUNT_EDITOR: 'USUARIO',
+};
 
 export const ACCESS_LEVEL = {
   SUPER_USER: 'SUPER_USER',

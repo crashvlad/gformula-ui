@@ -10,7 +10,7 @@ export default function MetricDetailPage() {
     <Layout>
       <PageHeading title="Detalles de métrica">
         <Link
-          href={ROUTES.app_objectives}
+          href={ROUTES.app_metric}
           className={buttonVariants({ variant: 'outline' })}
         >
           <ArrowLeft className="w-5 h-5 mr-2" /> Regresar

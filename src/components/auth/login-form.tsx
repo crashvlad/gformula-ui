@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/icons';
 import { useLogin } from '@/hooks';
+import { IS_PRODUCTION } from '@/lib/contants';
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -22,10 +23,12 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(userAuthSchema),
-    defaultValues: {
-      email: 'admin@velogig.com',
-      password: 'DYgSg7cXcw',
-    },
+    defaultValues: !IS_PRODUCTION
+      ? {
+          email: 'admin@velogig.com',
+          password: 'DYgSg7cXcw',
+        }
+      : {},
   });
   const { mutate: handleLogin, isLoading } = useLogin();
   const loading = isLoading || isSubmitting;

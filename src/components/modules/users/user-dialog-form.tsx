@@ -28,18 +28,21 @@ import {
 import { User } from '@/types';
 import { useGetAreas } from '@/hooks/areas';
 import { useAddUser, useUpdateUser } from '@/hooks/users';
+import { USER_ACCESS_LEVEL_OPTIONS } from '@/lib/contants';
 
 export const userFormSchema = z.object({
   name: z.string().min(2).max(50),
   email: z.string().email(),
   password: z.string().min(5),
   targetArea: z.string(),
+  accessLevel: z.string(),
   job: z.string(),
 });
 export const useFormUpdateSchema = z.object({
   name: z.string().min(2).max(50),
   email: z.string().email(),
   targetArea: z.string(),
+  accessLevel: z.string(),
   job: z.string(),
 });
 
@@ -53,10 +56,11 @@ export function UserDialogForm({
   const form = useForm<z.infer<typeof userFormSchema>>({
     resolver: zodResolver(user ? useFormUpdateSchema : userFormSchema),
     defaultValues: {
-      name: user?.name ?? undefined,
-      email: user?.email ?? undefined,
-      targetArea: user?.targetArea ?? undefined,
-      job: user?.job ?? undefined,
+      name: user?.name ?? '',
+      email: user?.email ?? '',
+      targetArea: user?.targetArea ?? '',
+      job: user?.job ?? '',
+      accessLevel: user?.accessLevel ?? '',
     },
   });
 
@@ -177,6 +181,34 @@ export function UserDialogForm({
                     </FormControl>
                     <SelectContent>
                       {areasOptions.map((s) => (
+                        <SelectItem value={s.value} key={s.id}>
+                          {s.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="accessLevel"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Rol</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona una opción" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {USER_ACCESS_LEVEL_OPTIONS.map((s) => (
                         <SelectItem value={s.value} key={s.id}>
                           {s.label}
                         </SelectItem>
