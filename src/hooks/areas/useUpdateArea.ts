@@ -2,7 +2,7 @@ import { toast } from '@/components/ui/use-toast';
 import { authApi } from '@/lib/auth-api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-async function updateArea(data: { id: string; name: string }) {
+async function updateArea(data: { id: string; name?: string }) {
   const { id, ...rest } = data;
   const body = { ...rest };
 
