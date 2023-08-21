@@ -2,6 +2,7 @@ import { toast } from '@/components/ui/use-toast';
 import { authApi } from '@/lib/auth-api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 async function addObjective(formData: any) {
   const body = { ...formData };
@@ -36,52 +37,18 @@ async function addObjective(formData: any) {
 
 export function useAddObjective() {
   const clientQuery = useQueryClient();
+  const router = useRouter();
 
   return useMutation(addObjective, {
-    onSettled: () => {
-      clientQuery.invalidateQueries({ queryKey: ['objectives'] });
-      clientQuery.invalidateQueries({ queryKey: ['metric-account'] });
-    },
-    onMutate: async (newObjective) => {
-      await clientQuery.cancelQueries({
-        queryKey: ['objectives', 'all', {}],
-      });
-      const previousObjectives = clientQuery.getQueryData([
-        'objectives',
-        'all',
-        {},
-      ]);
-
-      clientQuery.setQueryData(['objectives', 'all', {}], (old: any) => {
-        // const res = {
-        //   ...old,
-        //   data: [
-        //     {
-        //       ...newObjective,
-        //       id: Date.now(),
-        //       createdAt: new Date().toUTCString(),
-        //     },
-        //     ...old.data,
-        //   ],
-        // };
-
-        // return res;
-
-        return old;
-      });
-
-      return { previousObjectives };
-    },
     onError: (error, vars, ctx) => {
-      clientQuery.setQueryData(
-        ['objectives', 'all', {}],
-        ctx?.previousObjectives
-      );
       console.error(error);
       toast({ title: 'Al parecer algo ha salido mal!' });
     },
     onSuccess: (data) => {
       toast({ title: 'Objetivo creado!' });
+    },
+    onSettled: () => {
+      clientQuery.invalidateQueries({ queryKey: ['objectives', 'all'] });
     },
   });
 }

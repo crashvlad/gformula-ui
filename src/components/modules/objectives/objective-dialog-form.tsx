@@ -31,6 +31,7 @@ import {
 import { SALES_PROCESS_IMPACT_OPTIONS } from '@/lib/contants';
 import { Objective } from '@/types';
 import { useGetMetrics } from '@/hooks/metrics';
+import { useEffect, useMemo } from 'react';
 
 export const objectiveFormSchema = z.object({
   name: z.string().min(2).max(50),
@@ -51,16 +52,27 @@ export function ObjectiveDialogForm({
   const mutationUpdate = useUpdateObjective();
   const { metricsOptions } = useGetMetrics();
 
-  const form = useForm<z.infer<typeof objectiveFormSchema>>({
-    resolver: zodResolver(objectiveFormSchema),
-    defaultValues: {
+  const defaultValues = useMemo(() => {
+    const values = {
       name: objective?.name ?? '',
       type: objective?.type ?? '',
       description: objective?.description ?? '',
       endDate: objective?.endDate ?? '',
       metricId: objective?.metricId?.toString() ?? '',
-    },
+    };
+
+    return values;
+  }, [objective]);
+
+  const form = useForm<z.infer<typeof objectiveFormSchema>>({
+    resolver: zodResolver(objectiveFormSchema),
+    defaultValues: defaultValues,
   });
+
+  useEffect(() => {
+    form.reset(defaultValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues]);
 
   function onSubmit(values: z.infer<typeof objectiveFormSchema>) {
     const { metricId, ...rest } = values;
@@ -76,10 +88,20 @@ export function ObjectiveDialogForm({
     if (objective) {
       mutationUpdate.mutate(
         { ...payload, id: objective.id },
-        { onSuccess: () => afterMutation() }
+        {
+          onSuccess: () => {
+            afterMutation();
+            form.reset();
+          },
+        }
       );
     } else {
-      mutation.mutate(payload, { onSuccess: () => afterMutation() });
+      mutation.mutate(payload, {
+        onSuccess: () => {
+          afterMutation();
+          form.reset();
+        },
+      });
     }
   }
 

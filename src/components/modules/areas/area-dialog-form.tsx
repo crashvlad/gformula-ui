@@ -20,6 +20,7 @@ import {
 
 import * as z from 'zod';
 import { useUpdateArea, useAddArea } from '@/hooks/areas';
+import { useEffect, useMemo } from 'react';
 
 export const areaFormSchema = z.object({
   name: z.string().min(2).max(50),
@@ -35,19 +36,28 @@ export function AreaDialogForm({
   const mutation = useAddArea();
   const updateMutation = useUpdateArea();
 
+  const defaultValues = useMemo(() => {
+    const values = { name: area?.name ?? '' };
+
+    return values;
+  }, [area]);
+
   const form = useForm<z.infer<typeof areaFormSchema>>({
     resolver: zodResolver(areaFormSchema),
-    defaultValues: {
-      name: area?.name ?? undefined,
-    },
+    defaultValues,
   });
+
+  useEffect(() => {
+    form.reset(defaultValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues]);
 
   function onSubmit(values: z.infer<typeof areaFormSchema>) {
     if (!area) {
       mutation.mutate(values, {
         onSuccess: () => {
-          form.reset();
           afterMutation();
+          form.reset();
         },
       });
     } else {
@@ -55,8 +65,8 @@ export function AreaDialogForm({
         { id: area.id, ...values },
         {
           onSuccess: () => {
-            form.reset();
             afterMutation();
+            form.reset();
           },
         }
       );

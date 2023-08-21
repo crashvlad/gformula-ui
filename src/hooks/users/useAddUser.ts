@@ -19,23 +19,23 @@ export function useAddUser() {
   const queryClient = useQueryClient();
 
   return useMutation(fetchAddUser, {
-    onMutate: async (newUser) => {
-      await queryClient.cancelQueries({ queryKey: ['users'] });
-      const previousUsers = queryClient.getQueryData<User[]>(['users']);
+    // onMutate: async (newUser) => {
+    //   await queryClient.cancelQueries({ queryKey: ['users'] });
+    //   const previousUsers = queryClient.getQueryData<User[]>(['users']);
 
-      queryClient.setQueryData(['users'], (old: any) => {
-        const res = [
-          { ...newUser, id: Date.now(), createdAt: new Date().toUTCString() },
-          ...old,
-        ];
+    //   queryClient.setQueryData(['users'], (old: any) => {
+    //     const res = [
+    //       { ...newUser, id: Date.now(), createdAt: new Date().toUTCString() },
+    //       ...old,
+    //     ];
 
-        return res;
-      });
+    //     return res;
+    //   });
 
-      return { previousUsers };
-    },
+    //   return { previousUsers };
+    // },
     onError: (error, vars, ctx) => {
-      queryClient.setQueryData(['users'], ctx?.previousUsers);
+      // queryClient.setQueryData(['users'], ctx?.previousUsers);
       console.error(error);
       toast({ title: 'Al parecer algo ha salido mal!' });
     },

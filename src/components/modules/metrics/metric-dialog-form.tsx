@@ -21,6 +21,7 @@ import {
 import * as z from 'zod';
 import { Textarea } from '@/components/ui/textarea';
 import { useAddMetric, useUpdateMetric } from '@/hooks/metrics';
+import { useEffect, useMemo } from 'react';
 
 export const metricFormSchema = z.object({
   name: z.string().min(2).max(50),
@@ -34,13 +35,24 @@ export function MetricDialogForm({
   metric?: any;
   afterMutation: () => void;
 }) {
-  const form = useForm<z.infer<typeof metricFormSchema>>({
-    resolver: zodResolver(metricFormSchema),
-    defaultValues: {
+  const defaultValues = useMemo(() => {
+    const values = {
       name: metric?.name ?? undefined,
       description: metric?.description ?? undefined,
-    },
+    };
+
+    return values;
+  }, [metric]);
+
+  const form = useForm<z.infer<typeof metricFormSchema>>({
+    resolver: zodResolver(metricFormSchema),
+    defaultValues,
   });
+
+  useEffect(() => {
+    form.reset(defaultValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues]);
 
   const addMutation = useAddMetric();
   const updateMutation = useUpdateMetric();

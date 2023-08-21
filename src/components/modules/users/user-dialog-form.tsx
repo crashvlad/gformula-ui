@@ -29,6 +29,7 @@ import { User } from '@/types';
 import { useGetAreas } from '@/hooks/areas';
 import { useAddUser, useUpdateUser } from '@/hooks/users';
 import { USER_ACCESS_LEVEL_OPTIONS } from '@/lib/contants';
+import { useEffect, useMemo } from 'react';
 
 export const userFormSchema = z.object({
   name: z.string().min(2).max(50),
@@ -53,28 +54,49 @@ export function UserDialogForm({
   user?: User;
   afterMutation: () => void;
 }) {
-  const form = useForm<z.infer<typeof userFormSchema>>({
-    resolver: zodResolver(user ? useFormUpdateSchema : userFormSchema),
-    defaultValues: {
+  const defaultValues = useMemo(() => {
+    const values = {
       name: user?.name ?? '',
       email: user?.email ?? '',
       targetArea: user?.targetArea ?? '',
       job: user?.job ?? '',
       accessLevel: user?.accessLevel ?? '',
-    },
+    };
+
+    return values;
+  }, [user]);
+
+  const form = useForm<z.infer<typeof userFormSchema>>({
+    resolver: zodResolver(user ? useFormUpdateSchema : userFormSchema),
+    defaultValues,
   });
 
   const { areasOptions } = useGetAreas();
   const addMutation = useAddUser();
   const updateMutation = useUpdateUser();
 
+  useEffect(() => {
+    form.reset(defaultValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues]);
+
   function onSubmitCreate(values: z.infer<typeof userFormSchema>) {
-    addMutation.mutate(values, { onSuccess: () => afterMutation() });
+    addMutation.mutate(values, {
+      onSuccess: () => {
+        afterMutation();
+        form.reset();
+      },
+    });
   }
   function onSubmitUpdate(values: z.infer<typeof useFormUpdateSchema>) {
     updateMutation.mutate(
       { ...values, id: user?.id },
-      { onSuccess: () => afterMutation() }
+      {
+        onSuccess: () => {
+          afterMutation();
+          form.reset();
+        },
+      }
     );
   }
 
