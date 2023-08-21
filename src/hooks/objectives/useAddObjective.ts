@@ -67,8 +67,6 @@ export function useAddObjective() {
 
         // return res;
 
-        console.log({ old });
-
         return old;
       });
 

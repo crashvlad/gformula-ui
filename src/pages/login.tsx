@@ -26,13 +26,12 @@ export default function LoginPage() {
           Regresar
         </>
       </Link>
-      <div className="mx-auto border flex w-full flex-col justify-center p-4 rounded-md shadow-md space-y-6 sm:w-[400px]">
-        <div className="flex flex-col space-y-2 text-center">
-          <Icons.logo className="w-6 h-6 mx-auto" />
-          <h1 className="text-2xl font-semibold tracking-tight">Bienvenido</h1>
-          <p className="text-sm text-muted-foreground">
-            Inicia Sesión para continuar en Growth Formula.
-          </p>
+      <div className="mx-auto border flex w-full flex-col justify-center p-4 rounded-md shadow-md space-y-6 sm:w-[450px]">
+        <div className="flex flex-col">
+          <Icons.logo className="mx-auto" />
+          <h1 className="mt-6 text-xl font-semibold tracking-tight md:text-2xl">
+            Inicia Sesión para continuar
+          </h1>
         </div>
         <LoginForm />
         <p className="px-8 text-sm text-center text-muted-foreground">

@@ -83,8 +83,6 @@ export function ObjectiveDialogForm({
     }
   }
 
-  console.log({ objective });
-
   return (
     <>
       <DialogContent className="sm:max-w-[600px] overflow-y-scroll max-h-[85vh]">

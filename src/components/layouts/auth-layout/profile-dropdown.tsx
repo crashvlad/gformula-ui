@@ -22,6 +22,7 @@ import {
 import { Icons } from '@/components/icons';
 import { ROUTES } from '@/config/routes';
 import { useUser } from '@/components/context/AuthContext';
+import { getInitials } from '@/lib/get-initials';
 
 interface ProfileDropdownProps {}
 
@@ -32,15 +33,15 @@ export const ProfileDropdown: FC<ProfileDropdownProps> = ({}) => {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative w-8 h-8 rounded-full">
           <Avatar className="w-8 h-8">
-            <AvatarFallback>SA</AvatarFallback>
+            <AvatarFallback>{getInitials(user?.name ?? '')}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel>
-          <span className="block text-sm capitalize">Sebastian Acosta</span>
+          <span className="block text-sm capitalize">{user?.name}</span>
           <span className="block text-sm font-medium truncate">
-            correo@correo.com
+            {user?.email}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
