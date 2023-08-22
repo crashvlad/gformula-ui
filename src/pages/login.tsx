@@ -36,7 +36,7 @@ export default function LoginPage() {
         <LoginForm />
         <p className="px-8 text-sm text-center text-muted-foreground">
           <Link
-            href="/register"
+            href="/"
             className="underline hover:text-brand underline-offset-4"
           >
             Aún no tienes una cuenta? Registrate
