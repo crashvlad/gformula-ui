@@ -17,6 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { Skeleton } from '@/components/ui/skeleton';
 import { ROUTES } from '@/config/routes';
 import { useGetTests } from '@/hooks/tests';
 import { getFormatDateDistance } from '@/lib/date';
@@ -35,14 +36,18 @@ export const TestsList = ({ status }) => {
 
   return (
     <div className="mt-6">
-      {isLoading && <div>Cargando...</div>}
-      {!isLoading && data && (
-        <section className="grid w-full grid-cols-4 gap-5">
-          {data.map((t) => (
-            <TestListCard key={t.id} test={t} />
-          ))}
-        </section>
-      )}
+      <section className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {isLoading && (
+          <>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Skeleton key={i} className="h-72" />
+            ))}
+          </>
+        )}
+        {!isLoading &&
+          data &&
+          data.map((t) => <TestListCard key={t.id} test={t} />)}
+      </section>
     </div>
   );
 };
