@@ -39,9 +39,11 @@ export function useGetTests({
   filter?: FilterParams;
   enabled?: boolean;
 } = {}) {
-  return useQuery(
+  const res = useQuery(
     ['tests', status],
     async () => await fetchTests(status, filter),
     { enabled }
   );
+
+  return { ...res, tests: res.data ?? [] };
 }

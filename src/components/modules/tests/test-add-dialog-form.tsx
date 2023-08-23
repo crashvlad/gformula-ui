@@ -107,7 +107,7 @@ export function TestAddDialogForm() {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="max-w-sm">
+            <div className="md:max-w-sm">
               <FormField
                 control={form.control}
                 name="name"

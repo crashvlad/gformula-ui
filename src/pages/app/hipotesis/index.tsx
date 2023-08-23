@@ -20,9 +20,7 @@ export default function HypothesisPage() {
       <PageHeading
         title="Hipótesis"
         description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-      >
-        <TestAddDialogForm />
-      </PageHeading>
+      ></PageHeading>
 
       <Tabs defaultValue="hipótesis" className="">
         <TabsList className="grid w-full grid-cols-4">

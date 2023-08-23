@@ -17,25 +17,67 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ROUTES } from '@/config/routes';
 import { useGetTests } from '@/hooks/tests';
 import { getFormatDateDistance } from '@/lib/date';
+import { cn } from '@/lib/utils';
 import { Experiment } from '@/types';
 import {
   CalendarDays,
   Eye,
   MoreVerticalIcon,
   Pencil,
+  RefreshCcw,
   Trash2,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useMemo, useState } from 'react';
+import { TestAddDialogForm } from './test-add-dialog-form';
 
 export const TestsList = ({ status }) => {
-  const { data, isLoading } = useGetTests({ status });
+  const { data, isLoading, tests, refetch, isRefetching } = useGetTests({
+    status,
+  });
+  const [query, setQuery] = useState('');
+
+  const filteredTests = useMemo(() => {
+    return query != null && query.length > 0
+      ? tests.filter((user) => {
+          return user.name?.toLowerCase().includes(query.toLowerCase());
+        })
+      : tests;
+  }, [tests, query]);
+
+  console.log({ filteredTests });
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 space-y-8">
+      <header className="flex flex-col justify-between w-full gap-4 md:flex-row">
+        <Input
+          placeholder={'Filtrar hipótesis...'}
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          className="max-w-xs"
+        />
+
+        <div className="flex gap-5">
+          <TestAddDialogForm />
+
+          <Button
+            variant={'outline'}
+            disabled={isRefetching}
+            onClick={() => refetch()}
+          >
+            <RefreshCcw
+              className={cn('w-5 h-5 mr-2', isRefetching && 'animate-spin')}
+            />
+            Recargar
+          </Button>
+        </div>
+      </header>
+
       <section className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {isLoading && (
           <>
@@ -44,9 +86,16 @@ export const TestsList = ({ status }) => {
             ))}
           </>
         )}
+
+        {!isLoading && filteredTests.length === 0 && (
+          <div className="flex items-center justify-center col-span-1 py-16 text-xl font-bold border rounded-lg h-72">
+            No hay resultados
+          </div>
+        )}
+
         {!isLoading &&
-          data &&
-          data.map((t) => <TestListCard key={t.id} test={t} />)}
+          filteredTests.length > 0 &&
+          filteredTests.map((t) => <TestListCard key={t.id} test={t} />)}
       </section>
     </div>
   );
