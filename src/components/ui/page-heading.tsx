@@ -17,7 +17,7 @@ export function PageHeading({ children, title, description }: IPageHeading) {
             <p className="text-muted-foreground">{description}</p>
           )}
         </div>
-        <div className="flex flex-shrink-0 gap-2 mt-4 md:mt-0 md:ml-4">
+        <div className="flex flex-shrink-0 gap-2 mt-4 md:mt-0 md:ml-8">
           {children}
         </div>
       </div>

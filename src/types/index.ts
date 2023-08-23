@@ -40,9 +40,9 @@ export const objectiveValidator = z.object({
   endDate: z.string().nullable(),
   status: z.string(),
   type: z.string(),
-  tests: z.array(z.any()),
-  metric: MetricSchema.nullable(),
-  creator: userValidator,
+  tests: z.array(z.any()).optional(),
+  metric: MetricSchema.nullable().optional(),
+  creator: userValidator.optional(),
   accountId: z.number(),
   creatorId: z.number(),
   metricId: z.number().nullable(),
@@ -54,3 +54,33 @@ export const objectiveValidator = z.object({
 export type Objective = z.infer<typeof objectiveValidator>;
 
 export const objectiveArrayValidator = z.array(objectiveValidator);
+
+export const experimentValidator = z.object({
+  id: z.number(),
+  name: z.string(),
+  description: z.string(),
+  targetArea: z.string(),
+  creatorArea: z.string(),
+  color: z.string().nullable(),
+  difficulty: z.number(),
+  confidence: z.number(),
+  impact: z.number(),
+  results: z.string().nullable(),
+  startDate: z.string().nullable(),
+  endDate: z.string().nullable(),
+  creatorId: z.number(),
+  accountId: z.number(),
+  objectiveId: z.number(),
+  resultStatus: z.string().nullable(),
+  status: z.string(),
+  type: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  deletedAt: z.string().nullable(),
+  objective: objectiveValidator,
+  creator: userValidator,
+});
+
+export type Experiment = z.infer<typeof experimentValidator>;
+
+export const experimentArrayValidator = z.array(experimentValidator);

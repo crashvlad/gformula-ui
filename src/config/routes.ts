@@ -6,6 +6,7 @@ export const ROUTES = {
   app_objectives: '/app/objetivos',
   app_objectives_detail: (id: string | number) => `/app/objetivos/${id}`,
   app_hypothesis: '/app/hipotesis',
+  app_hypothesis_detail: (id: string | number) => `/app/hipotesis/${id}`,
   app_results: '/app/resultados',
   app_metric: '/app/metrica-clave',
   app_metric_detail: (id: string | number) => `/app/metrica-clave/${id}`,

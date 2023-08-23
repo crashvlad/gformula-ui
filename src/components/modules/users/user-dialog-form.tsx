@@ -107,7 +107,7 @@ export function UserDialogForm({
 
   return (
     <>
-      <DialogContent className="sm:max-w-[500px] overflow-y-scroll max-h-[85vh]">
+      <DialogContent className="sm:max-w-[750px] overflow-y-scroll max-h-[85vh]">
         <DialogHeader>
           <DialogTitle>Añadir Usuario</DialogTitle>
         </DialogHeader>
@@ -139,21 +139,38 @@ export function UserDialogForm({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Correo electrónico</FormLabel>
-                  <FormControl>
-                    <Input {...field} type="email" />
-                  </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid space-y-8 md:space-y-0 md:gap-5 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Correo electrónico</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="email" />
+                    </FormControl>
 
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="job"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Puesto de trabajo</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             {!user && (
               <FormField
                 control={form.control}
@@ -171,77 +188,64 @@ export function UserDialogForm({
               />
             )}
 
-            <FormField
-              control={form.control}
-              name="job"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Puesto de trabajo</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
+            <div className="grid space-y-8 md:space-y-0 md:gap-5 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="targetArea"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Área de trabajo</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona una opción" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {areasOptions.map((s) => (
+                          <SelectItem value={s.value} key={s.id}>
+                            {s.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="accessLevel"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Rol</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona una opción" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {USER_ACCESS_LEVEL_OPTIONS.map((s) => (
+                          <SelectItem value={s.value} key={s.id}>
+                            {s.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-            <FormField
-              control={form.control}
-              name="targetArea"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Área de trabajo</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona una opción" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {areasOptions.map((s) => (
-                        <SelectItem value={s.value} key={s.id}>
-                          {s.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="accessLevel"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Rol</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona una opción" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {USER_ACCESS_LEVEL_OPTIONS.map((s) => (
-                        <SelectItem value={s.value} key={s.id}>
-                          {s.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="flex justify-end gap-3">
               <DialogClose>

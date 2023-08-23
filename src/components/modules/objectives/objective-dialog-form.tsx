@@ -107,7 +107,7 @@ export function ObjectiveDialogForm({
 
   return (
     <>
-      <DialogContent className="sm:max-w-[600px] overflow-y-scroll max-h-[85vh]">
+      <DialogContent className="sm:max-w-[800px] overflow-y-scroll max-h-[85vh]">
         <DialogHeader>
           <DialogTitle>Añadir Objetivo</DialogTitle>
           <DialogDescription>Añade nuevos objetivos</DialogDescription>
@@ -123,25 +123,6 @@ export function ObjectiveDialogForm({
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="Escriba el nombre de su objetivo"
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="endDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Cuando la queremos cumplir?</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="date"
                       placeholder="Escriba el nombre de su objetivo"
                     />
                   </FormControl>
@@ -180,36 +161,58 @@ export function ObjectiveDialogForm({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Que parte del proceso de venta impactara?
-                  </FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+            <div className="grid space-y-8 md:space-y-0 md:gap-5 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="endDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Cuando la queremos cumplir?</FormLabel>
                     <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona una opción" />
-                      </SelectTrigger>
+                      <Input
+                        {...field}
+                        type="date"
+                        placeholder="Escriba el nombre de su objetivo"
+                      />
                     </FormControl>
-                    <SelectContent>
-                      {SALES_PROCESS_IMPACT_OPTIONS.map((s) => (
-                        <SelectItem value={s.value} key={s.id}>
-                          {s.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Que parte del proceso de venta impactara?
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona una opción" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {SALES_PROCESS_IMPACT_OPTIONS.map((s) => (
+                          <SelectItem value={s.value} key={s.id}>
+                            {s.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
             <FormField
               control={form.control}
               name="description"
