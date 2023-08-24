@@ -16,6 +16,11 @@ export const sidebarConfig = [
     path: ROUTES.app_home,
   },
   {
+    icon: BarChart,
+    title: 'Métrica Clave',
+    path: ROUTES.app_metric,
+  },
+  {
     icon: Flag,
     title: 'Objetivos',
     path: ROUTES.app_objectives,
@@ -25,11 +30,7 @@ export const sidebarConfig = [
     title: 'Hipótesis',
     path: ROUTES.app_hypothesis,
   },
-  {
-    icon: BarChart,
-    title: 'Métrica Clave',
-    path: ROUTES.app_metric,
-  },
+
   {
     icon: LayoutPanelLeft,
     title: 'Dashboard',
@@ -37,7 +38,7 @@ export const sidebarConfig = [
   },
   {
     icon: Heart,
-    title: 'salud',
+    title: 'Salud',
     path: ROUTES.app_health,
   },
   {

@@ -22,6 +22,20 @@ export const SALES_PROCESS_IMPACT_OPTIONS = [
   { id: 5, value: 'MONETIZATION', label: 'MONETIZACIÓN' },
 ];
 
+export const RESULTS_OPTIONS = [
+  { id: 1, value: 'NOT_WORK', label: 'No Funcionó' },
+  { id: 2, value: 'WORK', label: 'Funcionó' },
+  { id: 3, value: 'NOT_CONCLUSIVE', label: 'No Concluyo' },
+];
+
+export const SALES_PROCESS_IMPACT_DICTIONARY = {
+  ACTIVATION: 'ACTIVACIÓN',
+  RETENTION: 'RETENCIÓN',
+  ACQUISITION: 'ADQUISICIÓN',
+  VIRAL: 'VIRAL',
+  MONETIZATION: 'MONETIZACIÓN',
+};
+
 export const USER_ACCESS_LEVEL_OPTIONS = [
   { id: 1, value: 'ACCOUNT_ADMIN', label: 'ADMINISTRADOR' },
   { id: 2, value: 'ACCOUNT_EDITOR', label: 'USUARIO' },

@@ -40,7 +40,7 @@ export function useGetTests({
   enabled?: boolean;
 } = {}) {
   const res = useQuery(
-    ['tests', status],
+    ['tests', status, filter],
     async () => await fetchTests(status, filter),
     { enabled }
   );

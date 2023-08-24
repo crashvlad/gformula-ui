@@ -1,6 +1,5 @@
 import { Layout } from '@/components/layouts/auth-layout';
-import { TestAddDialogForm, TestsList } from '@/components/modules/tests';
-import { Button } from '@/components/ui/button';
+import { TestsList } from '@/components/modules/tests';
 import { PageHeading } from '@/components/ui/page-heading';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -11,10 +10,17 @@ import {
   FlaskConical,
   FolderArchive,
   Lightbulb,
-  Plus,
 } from 'lucide-react';
 
 export default function HypothesisPage() {
+  const { data } = useGetTests();
+
+  const tests = data ?? [];
+  const hipoLength = tests.filter((i) => i.status === 'IDEA').length;
+  const testLength = tests.filter((i) => i.status === 'TEST').length;
+  const completeLength = tests.filter((i) => i.status === 'COMPLETED').length;
+  const closeLength = tests.filter((i) => i.status === 'CLOSED').length;
+
   return (
     <Layout>
       <PageHeading
@@ -26,19 +32,19 @@ export default function HypothesisPage() {
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="hipótesis">
             <Lightbulb className="w-5 h-5 mr-2" />
-            Hipótesis
+            Hipótesis ({hipoLength})
           </TabsTrigger>
           <TabsTrigger value="experimentación">
             <FlaskConical className="w-5 h-5 mr-2" />
-            Experimentación
+            Experimentación ({testLength})
           </TabsTrigger>
           <TabsTrigger value="resultados">
             <FileSpreadsheet className="w-5 h-5 mr-2" />
-            Resultados
+            Resultados ({completeLength})
           </TabsTrigger>
           <TabsTrigger value="archivados">
             <FolderArchive className="w-5 h-5 mr-2" />
-            Archivados
+            Archivados ({closeLength})
           </TabsTrigger>
         </TabsList>
         <TabsContent value="hipótesis">

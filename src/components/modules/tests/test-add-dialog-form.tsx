@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -34,7 +35,8 @@ import { SALES_PROCESS_IMPACT_OPTIONS } from '@/lib/contants';
 import { useGetAreas } from '@/hooks/areas';
 import { useGetObjectives } from '@/hooks';
 import { Textarea } from '@/components/ui/textarea';
-import { useAddTest } from '@/hooks/tests';
+import { useAddTest, useUpdateTest } from '@/hooks/tests';
+import { Experiment } from '@/types';
 
 export const testAddForm = z.object({
   name: z
@@ -70,16 +72,37 @@ export const testAddForm = z.object({
     .max(10, { message: 'El valor no debe exceder 10' }),
 });
 
-export function TestAddDialogForm() {
-  const { mutateAsync, isLoading } = useAddTest();
+export function TestAddDialogForm({
+  open,
+  test,
+  handleOpenChange,
+  afterMutation,
+}: {
+  test?: Experiment;
+  open: boolean;
+  handleOpenChange: (value: boolean) => void;
+  afterMutation: () => void;
+}) {
+  const addMutation = useAddTest();
+  const updateMutation = useUpdateTest();
 
   const { areasOptions } = useGetAreas();
   const { optionsObjectives } = useGetObjectives();
 
-  const [open, setOpen] = useState(false);
-
   const form = useForm<z.infer<typeof testAddForm>>({
     resolver: zodResolver(testAddForm),
+    defaultValues: test
+      ? {
+          name: test?.name ?? '',
+          description: test?.description ?? '',
+          objectiveId: test?.objectiveId.toString() ?? '',
+          targetArea: test?.targetArea ?? '',
+          type: test?.type ?? '',
+          impact: test?.impact,
+          confidence: test?.confidence,
+          difficulty: test?.difficulty,
+        }
+      : {},
   });
 
   async function onSubmit(values: z.infer<typeof testAddForm>) {
@@ -88,19 +111,24 @@ export function TestAddDialogForm() {
       objectiveId: Number(values.objectiveId),
     };
 
-    await mutateAsync(payload, {
-      onSuccess: () => setOpen(false),
-    });
+    if (test) {
+      await updateMutation.mutateAsync(
+        { id: test.id, ...payload },
+        {
+          onSuccess: () => afterMutation(),
+        }
+      );
+    } else {
+      await addMutation.mutateAsync(payload, {
+        onSuccess: () => afterMutation(),
+      });
+    }
   }
 
-  const loading = form.formState.isSubmitting || isLoading;
+  const loading = form.formState.isSubmitting || addMutation.isLoading;
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button leftIcon={Plus}>Añadir</Button>
-      </DialogTrigger>
-
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[800px] overflow-y-scroll max-h-[85vh]">
         <DialogHeader>
           <DialogTitle>Crear nueva Hipótesis</DialogTitle>
@@ -117,6 +145,11 @@ export function TestAddDialogForm() {
                     <FormControl>
                       <Input {...field} placeholder="" />
                     </FormControl>
+
+                    <FormDescription>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Qui quis officiis labore cupiditate, aspernatur amet?
+                    </FormDescription>
 
                     <FormMessage />
                   </FormItem>
@@ -272,13 +305,13 @@ export function TestAddDialogForm() {
             />
 
             <div className="flex justify-end gap-3">
-              <DialogClose>
+              <DialogClose asChild>
                 <Button type="button" variant={'outline'}>
                   Cancelar
                 </Button>
               </DialogClose>
               <Button disabled={loading} loading={loading} type="submit">
-                Añadir
+                {test ? 'Editar' : 'Añadir'}
               </Button>
             </div>
           </form>

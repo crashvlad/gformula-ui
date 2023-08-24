@@ -105,7 +105,7 @@ export function AreaDialogForm({
             />
 
             <div className="flex justify-end gap-3">
-              <DialogClose>
+              <DialogClose asChild>
                 <Button type="button" variant={'outline'}>
                   Cancelar
                 </Button>

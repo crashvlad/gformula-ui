@@ -15,7 +15,7 @@ export function Layout({ children }: LayoutProps) {
 
         <div className="flex h-full overflow-hidden bg-background lg:min-h-[calc(100vh-3.5rem)]">
           <Sidebar />
-          <main className="container flex-1 h-full py-3 overflow-hidden overflow-y-auto lg:ml-56">
+          <main className="flex-1 h-full px-6 py-3 overflow-hidden overflow-y-auto lg:ml-56">
             {children}
           </main>
         </div>

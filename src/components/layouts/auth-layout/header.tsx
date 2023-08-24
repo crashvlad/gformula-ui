@@ -19,7 +19,7 @@ export const Header: FC<DashboardHeaderProps> = ({}) => {
 
   return (
     <div className="sticky top-0 z-30 border-b bg-background backdrop-blur-sm">
-      <header className="container flex h-[3.5rem] items-center justify-between">
+      <header className="px-6 flex h-[3.5rem] items-center justify-between">
         <nav className="flex items-center">
           <MobileSidebar />
 

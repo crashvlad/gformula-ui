@@ -2,7 +2,7 @@ import { experimentValidator } from '@/types';
 import { authApi } from '@/lib/auth-api';
 import { useQuery } from '@tanstack/react-query';
 
-async function fetchTest(id: string) {
+async function fetchTest(id: string | number) {
   try {
     const { data } = await authApi.get(`/api/test/detail/${id}`);
 
@@ -12,7 +12,7 @@ async function fetchTest(id: string) {
   }
 }
 
-export function useGetTest(id: string, enabled = true) {
+export function useGetTest(id: string | number, enabled = true) {
   return useQuery(['test', id], async () => await fetchTest(id), {
     enabled,
   });
