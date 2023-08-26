@@ -6,11 +6,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { useGetActivities } from '@/hooks/activities';
+import { useGetActivities, useUpdateActivity } from '@/hooks/activities';
 import Link from 'next/link';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getFormatDateDistance } from '@/lib/date';
 import { ROUTES } from '@/config/routes';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 export function NotificationPopover() {
   const { data, isLoading } = useGetActivities();
@@ -33,7 +35,20 @@ export function NotificationPopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button
+          aria-label="Cart"
+          variant="outline"
+          className="relative"
+          size="sm"
+        >
+          {countNotReadNotification > 0 && (
+            <Badge
+              variant="secondary"
+              className="absolute flex items-center justify-center -right-2 -top-2 h-6 w-6 rounded-full p-2"
+            >
+              {countNotReadNotification}
+            </Badge>
+          )}
           <BellIcon className="w-5 h-5" />
         </Button>
       </PopoverTrigger>
@@ -55,16 +70,27 @@ export function NotificationPopover() {
 function NotificationItem({ notification }: { notification: any }) {
   const { objectiveId, metricId, testId } = notification;
   let route = '/';
+  const { mutate, isLoading: isLoading } = useUpdateActivity();
 
   if (objectiveId) route = ROUTES.app_objectives_detail(objectiveId);
-  if (metricId) route = ROUTES.app_metric;
-  if (testId) route = ROUTES.app_hypothesis;
+  if (metricId) route = ROUTES.app_metric_detail(metricId);
+  if (testId) route = ROUTES.app_hypothesis_detail(testId);
+
+  const handleClick = () => {
+    if (!notification.isRead) {
+      mutate({ id: notification.id, isRead: true });
+    }
+  };
 
   return (
     <Link
       key={notification.id}
       href={route}
-      className="px-3 py-3 hover:bg-muted/50"
+      className={cn(
+        'px-3 py-3 hover:bg-muted/50',
+        notification.isRead && 'bg-muted/50'
+      )}
+      onClick={handleClick}
     >
       <div className="flex flex-col gap-1">
         {notification.name}

@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Textarea } from '@/components/ui/textarea';
 import { useGetCommentsObjective } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { Send } from 'lucide-react';
@@ -27,7 +28,7 @@ export function ObjectiveComments() {
       {isLoadingComments && <Skeleton className="h-96" />}
 
       {!isLoadingComments && dataComments && (
-        <Card>
+        <Card className="min-h-[310px] flex flex-col">
           <CardHeader className="flex flex-row items-center">
             <CardTitle>Comentarios</CardTitle>
           </CardHeader>
@@ -48,17 +49,18 @@ export function ObjectiveComments() {
               ))}
             </div>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="mt-auto">
             <form
               onSubmit={(event) => {
                 event.preventDefault();
 
                 event.currentTarget.message.value = '';
               }}
-              className="flex items-center w-full space-x-2"
+              className="flex w-full space-x-2"
             >
-              <Input
+              <Textarea
                 id="message"
+                rows={2}
                 placeholder="Escribe un comentario..."
                 className="flex-1"
               />

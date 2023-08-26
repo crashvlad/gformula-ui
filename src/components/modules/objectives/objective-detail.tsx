@@ -42,22 +42,13 @@ export function ObjectiveDetail() {
               {data.tests.length}
             </p>
 
-            <div className="flex items-center justify-around">
-              <p className="flex flex-col items-center space-y-2">
-                <span className="text-lg font-medium">Fecha de inicio</span>
-                <span className="flex items-center">
-                  <CalendarDays className="w-4 h-4 mr-2" />
-                  {data.startDate}
-                </span>
-              </p>
-              <p className="flex flex-col items-center space-y-2">
-                <span className="text-lg font-medium">Fecha de fin</span>
-                <span className="flex items-center">
-                  <CalendarDays className="w-4 h-4 mr-2" />
-                  {data.endDate}
-                </span>
-              </p>
-            </div>
+            <p className="flex flex-col space-y-2">
+              <span className="text-lg font-medium">Fecha de fin</span>
+              <span className="flex items-center">
+                <CalendarDays className="w-4 h-4 mr-2" />
+                {data.endDate}
+              </span>
+            </p>
           </CardContent>
         </Card>
       )}

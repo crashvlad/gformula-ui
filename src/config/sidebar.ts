@@ -1,4 +1,5 @@
 import {
+  ArrowUp,
   BarChart,
   FileText,
   Flag,
@@ -11,8 +12,8 @@ import { ROUTES } from './routes';
 
 export const sidebarConfig = [
   {
-    icon: HomeIcon,
-    title: 'Inicio',
+    icon: ArrowUp,
+    title: 'Get started',
     path: ROUTES.app_home,
   },
   {

@@ -13,12 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 import type { FC } from 'react';
-import {
-  LayoutDashboard,
-  LayoutPanelLeft,
-  Lightbulb,
-  ShoppingCart,
-} from 'lucide-react';
+import { LayoutPanelLeft, Lightbulb } from 'lucide-react';
 import { Icons } from '@/components/icons';
 import { ROUTES } from '@/config/routes';
 import { useUser } from '@/components/context/AuthContext';

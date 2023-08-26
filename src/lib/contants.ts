@@ -15,9 +15,9 @@ export const PROD_URL = 'https://growth-formula-api.onrender.com';
 export const BASE_URL = IS_PRODUCTION ? PROD_URL : LOCAL_URL;
 
 export const SALES_PROCESS_IMPACT_OPTIONS = [
+  { id: 3, value: 'ACQUISITION', label: 'ADQUISICIÓN' },
   { id: 1, value: 'ACTIVATION', label: 'ACTIVACIÓN' },
   { id: 2, value: 'RETENTION', label: 'RETENCIÓN' },
-  { id: 3, value: 'ACQUISITION', label: 'ADQUISICIÓN' },
   { id: 4, value: 'VIRAL', label: 'VIRAL' },
   { id: 5, value: 'MONETIZATION', label: 'MONETIZACIÓN' },
 ];

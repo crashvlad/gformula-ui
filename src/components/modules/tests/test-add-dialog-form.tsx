@@ -23,7 +23,7 @@ import {
 
 import * as z from 'zod';
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { InfoIcon, Plus } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -37,6 +37,12 @@ import { useGetObjectives } from '@/hooks';
 import { Textarea } from '@/components/ui/textarea';
 import { useAddTest, useUpdateTest } from '@/hooks/tests';
 import { Experiment } from '@/types';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export const testAddForm = z.object({
   name: z
@@ -141,15 +147,26 @@ export function TestAddDialogForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nombre</FormLabel>
+                    <FormLabel className="flex items-center gap-3">
+                      Nombre
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <InfoIcon className="h-5 w-5" />
+                          </TooltipTrigger>
+                          <TooltipContent align="start" className="w-44">
+                            <p>
+                              Lorem ipsum dolor sit amet Lorem ipsum dolor, sit
+                              amet consectetur adipisicing elit. Corrupti
+                              voluptate debitis minima?{' '}
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="" />
                     </FormControl>
-
-                    <FormDescription>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Qui quis officiis labore cupiditate, aspernatur amet?
-                    </FormDescription>
 
                     <FormMessage />
                   </FormItem>

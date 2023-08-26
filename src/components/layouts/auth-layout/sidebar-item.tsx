@@ -23,7 +23,8 @@ export function SidebarItem({ path, title, icon: Icon }: IListemItem) {
     <Link
       className={cn(
         buttonVariants({ variant: 'ghost' }),
-        active && 'bg-muted hover:bg-muted',
+        'hover:bg-primary/50',
+        active && 'bg-primary/50 hover:bg-primary/50',
         'w-full justify-start'
       )}
       href={path}

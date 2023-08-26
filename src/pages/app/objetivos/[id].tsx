@@ -7,6 +7,7 @@ import { ROUTES } from '@/config/routes';
 import {
   ObjectiveComments,
   ObjectiveDetail,
+  ObjectiveNotifyUsers,
 } from '@/components/modules/objectives';
 
 export default function ObjetiveDetailPage() {
@@ -24,6 +25,7 @@ export default function ObjetiveDetailPage() {
       <div className="grid items-start gap-4 md:grid-cols-2">
         <ObjectiveDetail />
         <ObjectiveComments />
+        <ObjectiveNotifyUsers />
       </div>
     </Layout>
   );
