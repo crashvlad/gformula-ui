@@ -24,7 +24,7 @@ export const UserWinnerCard = ({
           <AvatarFallback>{getInitials(name)}</AvatarFallback>
         </Avatar>
 
-        <h4 className="font-medium text-lg ">{name}</h4>
+        <h4 className="font-medium text-lg text-primary">{name}</h4>
 
         <p className="text-muted-foreground mb-2">{job}</p>
 
