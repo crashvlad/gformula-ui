@@ -61,38 +61,27 @@ export function ObjectiveComments() {
 
       {!isLoadingComments && dataComments && (
         <Card className="flex flex-col">
-          <CardHeader className="flex flex-row items-center">
+          <CardHeader className="flex flex-row items-center border-b">
             <CardTitle>Comentarios</CardTitle>
           </CardHeader>
-          <CardContent className="overflow-hidden overflow-y-auto">
+          <CardContent className="py-4 overflow-hidden overflow-y-auto h-96">
             <div className="space-y-4">
               {dataComments?.map((message: any, index: number) => {
                 const isCurrenUserComment = message.creatorId === user?.id;
-                const isNotCurrentUserCommnet = message.creatorId !== user?.id;
 
                 return (
                   <div
                     key={index}
                     className={cn(
-                      'flex flex-col gap-3 w-max max-w-[75%] text-sm',
+                      'flex items-start gap-3 w-max max-w-[80%] text-sm',
                       isCurrenUserComment && 'ml-auto '
                     )}
                   >
-                    {isNotCurrentUserCommnet && (
-                      <div className="flex items-center gap-2 ">
-                        <Avatar>
-                          <AvatarFallback>
-                            {getInitials(message.creator.name)}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex flex-col">
-                          <span className="font-medium">
-                            {message.creator.name}
-                          </span>
-                          <span>{message.creator.job}</span>
-                        </div>
-                      </div>
-                    )}
+                    <Avatar>
+                      <AvatarFallback>
+                        {getInitials(message.creator.name)}
+                      </AvatarFallback>
+                    </Avatar>
 
                     <div
                       className={cn(
@@ -102,6 +91,9 @@ export function ObjectiveComments() {
                           : 'bg-muted'
                       )}
                     >
+                      <span className="font-medium">
+                        {message.creator.name}:{' '}
+                      </span>
                       {message.content}
                     </div>
                   </div>
@@ -109,7 +101,7 @@ export function ObjectiveComments() {
               })}
             </div>
           </CardContent>
-          <CardFooter className="mt-auto">
+          <CardFooter className="py-4 mt-auto border-t">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
