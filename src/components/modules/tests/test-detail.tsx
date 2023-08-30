@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
@@ -6,19 +7,17 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { getFormatDateDistance } from '@/lib/date';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useSearchParams } from 'next/navigation';
-import { useGetTest } from '@/hooks/tests';
-import { ACCESS_LEVEL, SALES_PROCESS_IMPACT_DICTIONARY } from '@/lib/contants';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { FlaskConical, ThumbsDown, ThumbsUp } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useGetTest } from '@/hooks/tests';
 import { useGetVote, useGetVotes, useUpdateVote } from '@/hooks/votes';
+import { ACCESS_LEVEL, SALES_PROCESS_IMPACT_DICTIONARY } from '@/lib/contants';
+import { getFormatDateDistance } from '@/lib/date';
 import { cn } from '@/lib/utils';
+import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 import { TestExperimentationDialogForm } from './test-experimentation-detail-dialog-form';
 import { TestResultDialogForm } from './test-result-dialog-form';
 export function TestDetail() {

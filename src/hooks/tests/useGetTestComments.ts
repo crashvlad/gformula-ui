@@ -11,10 +11,11 @@ async function getCommentsTest(id: string | number) {
   }
 }
 
-export function useGetTestComments(id: string | number) {
+export function useGetTestComments(id: string | number, enabled = true) {
   const res = useQuery(
     ['comments-test', id],
-    async () => await getCommentsTest(id)
+    async () => await getCommentsTest(id),
+    { enabled }
   );
 
   const comments = res?.data ?? [];

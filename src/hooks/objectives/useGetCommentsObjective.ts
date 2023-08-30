@@ -12,20 +12,14 @@ async function getCommentsObjective(id: string | number) {
   }
 }
 
-export function useGetCommentsObjective(id: string | number) {
-  const [comments, setComments] = useState([]);
+export function useGetCommentsObjective(id: string | number, enabled = true) {
   const res = useQuery(
     ['comments-objective', id],
-    async () => await getCommentsObjective(id)
+    async () => await getCommentsObjective(id),
+    { enabled: enabled }
   );
 
-  const { data, isLoading } = res;
-
-  useEffect(() => {
-    if (!isLoading && data && data.data) {
-      setComments(data.data);
-    }
-  }, [isLoading, data]);
+  const comments = res.data ?? [];
 
   return { ...res, comments };
 }

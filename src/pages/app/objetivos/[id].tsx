@@ -23,9 +23,11 @@ export default function ObjetiveDetailPage() {
       </PageHeading>
 
       <div className="grid items-start gap-4 md:grid-cols-2">
-        <ObjectiveDetail />
+        <div className="flex flex-col gap-4">
+          <ObjectiveDetail />
+          <ObjectiveNotifyUsers />
+        </div>
         <ObjectiveComments />
-        <ObjectiveNotifyUsers />
       </div>
     </Layout>
   );

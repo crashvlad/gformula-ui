@@ -88,34 +88,7 @@ export function TestResultDialogForm({ id }: { id: string }) {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="resultStatus"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Detalles del resultado</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona una opción" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {RESULTS_OPTIONS.map((s) => (
-                        <SelectItem value={s.value} key={s.id}>
-                          {s.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="results"
