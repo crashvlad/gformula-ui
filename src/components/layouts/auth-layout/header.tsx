@@ -30,16 +30,6 @@ export const Header: FC<DashboardHeaderProps> = ({}) => {
 
         <nav className="flex items-center space-x-3">
           <NotificationPopover />
-          {user && user.accessLevel === ACCESS_LEVEL.ACCOUNT_ADMIN && (
-            <Link
-              href={ROUTES.app_settings}
-              className={buttonVariants({ variant: 'outline', size: 'sm' })}
-            >
-              <span className="sr-only">Configuración</span>
-              <Settings className="w-5 h-5" />
-            </Link>
-          )}
-
           <ThemeToggle />
           <ProfileDropdown />
         </nav>

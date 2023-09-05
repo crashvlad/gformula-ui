@@ -44,7 +44,7 @@ export function NotificationPopover() {
           {countNotReadNotification > 0 && (
             <Badge
               variant="secondary"
-              className="absolute flex items-center justify-center -right-2 -top-2 h-6 w-6 rounded-full p-2"
+              className="absolute flex items-center justify-center w-6 h-6 p-2 rounded-full -right-2 -top-2"
             >
               {countNotReadNotification}
             </Badge>
@@ -53,7 +53,7 @@ export function NotificationPopover() {
         </Button>
       </PopoverTrigger>
       {notifications.length > 0 && (
-        <PopoverContent align="end" className="p-0 py-2">
+        <PopoverContent align="end" className="p-0">
           <ScrollArea className="h-96">
             <div className="flex flex-col">
               {notifications.map((n: any) => (

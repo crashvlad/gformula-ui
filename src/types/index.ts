@@ -20,14 +20,14 @@ export const userValidator = z.object({
   name: z.string(),
   username: z.string().nullable(),
   targetArea: z.string().nullable(),
-  phone: z.string().nullable(),
-  country: z.string().nullable(),
+  phone: z.string().nullable().optional(),
+  country: z.string().nullable().optional(),
   job: z.string().nullable(),
-  address: z.string().nullable(),
+  address: z.string().nullable().optional(),
   accessLevel: z.string(),
   createdAt: z.string(),
-  updatedAt: z.string().nullable(),
-  deletedAt: z.string().nullable(),
+  updatedAt: z.string().nullable().optional(),
+  deletedAt: z.string().nullable().optional(),
 });
 export const userArrayValidator = z.array(userValidator);
 export type User = z.infer<typeof userValidator>;

@@ -27,6 +27,11 @@ export const RESULTS_OPTIONS = [
   { id: 2, value: 'WORK', label: 'Funcionó' },
   { id: 3, value: 'NOT_CONCLUSIVE', label: 'No Concluyo' },
 ];
+export const RESULTS_OPTIONS_DICTIONARY = {
+  NOT_WORK: 'No Funcionó',
+  WORK: 'Funcionó',
+  NOT_CONCLUSIVE: 'No Concluyo',
+};
 
 export const SALES_PROCESS_IMPACT_DICTIONARY = {
   ACTIVATION: 'ACTIVACIÓN',

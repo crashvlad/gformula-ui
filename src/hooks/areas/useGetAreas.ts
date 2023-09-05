@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 async function fetchAccAreas() {
   try {
-    const { data } = await authApi.get(`/api/areas/acc-area`);
+    const { data } = await authApi.get(`/api/areas`);
 
     return data.data;
   } catch (error) {

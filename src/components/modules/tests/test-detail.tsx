@@ -20,6 +20,7 @@ import { ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { TestExperimentationDialogForm } from './test-experimentation-detail-dialog-form';
 import { TestResultDialogForm } from './test-result-dialog-form';
+import { useUser } from '@/components/context/AuthContext';
 export function TestDetail() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
@@ -28,6 +29,7 @@ export function TestDetail() {
   const { data, isLoading } = useGetTest(Number(id), Boolean(id));
   const { data: dataVote, refetch: refetchVote } = useGetVote(id);
   const { data: dataVotes, refetch: refetchVotes } = useGetVotes(Number(id));
+  const { user } = useUser();
 
   const totalVotesCount = dataVotes ? dataVotes.data.length : 0;
   const hasAdminApproval =
@@ -37,6 +39,7 @@ export function TestDetail() {
     );
   const hasAcceptableVotesCount = totalVotesCount > 5;
   const isReadyForNextStage = hasAcceptableVotesCount || hasAdminApproval;
+  const isOwner = user?.id == data?.creator?.id;
 
   return (
     <>
@@ -58,7 +61,7 @@ export function TestDetail() {
               {data.description}
             </p>
 
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
               <Badge>{SALES_PROCESS_IMPACT_DICTIONARY[data.type]}</Badge>
               <Badge className="uppercase">{data.targetArea}</Badge>
               <Badge>{data.status}</Badge>
@@ -132,11 +135,11 @@ export function TestDetail() {
           </CardContent>
 
           <CardFooter className="mt-2 ">
-            {isReadyForNextStage && data?.status === 'IDEA' && (
+            {isReadyForNextStage && data?.status === 'IDEA' && isOwner && (
               <TestExperimentationDialogForm id={id} />
             )}
 
-            {data.status === 'TEST' && (
+            {data.status === 'TEST' && isOwner && (
               <TestResultDialogForm id={data?.id.toString()} />
             )}
           </CardFooter>

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 async function removeArea(id: string) {
   try {
-    const { data } = await authApi.post(`/api/areas/delete/${id}`);
+    const { data } = await authApi.delete(`/api/areas/${id}`);
     return data;
   } catch (error) {
     throw error;

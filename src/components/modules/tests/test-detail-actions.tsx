@@ -33,36 +33,32 @@ export const TestDetailAction = ({ test }: { test: Experiment }) => {
   const isOwner = user?.id === test.creator.id;
   const isAdminUser = user?.accessLevel === ACCESS_LEVEL.ACCOUNT_ADMIN;
 
-  const isShowDeleteButton = isOwner || isAdminUser;
+  const isShow = isOwner || isAdminUser;
 
   const updateMutation = useUpdateTest();
 
   return (
     <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="data-[state=open]:bg-muted ">
-            <MoreVerticalIcon className="w-4 h-4 mr-2" />
-            Acciones
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[160px]">
-          {isOwner && (
-            <>
-              <DropdownMenuGroup>
-                <DropdownMenuItem
-                  className="flex justify-between"
-                  onSelect={() => setIsOpenForm(true)}
-                >
-                  Editar
-                  <Pencil className="w-4 h-4" />
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-            </>
-          )}
+      {isShow && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="data-[state=open]:bg-muted ">
+              <MoreVerticalIcon className="w-4 h-4 mr-2" />
+              Acciones
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-[160px]">
+            <DropdownMenuGroup>
+              <DropdownMenuItem
+                className="flex justify-between"
+                onSelect={() => setIsOpenForm(true)}
+              >
+                Editar
+                <Pencil className="w-4 h-4" />
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
 
-          {isShowDeleteButton && (
             <DropdownMenuGroup>
               <DropdownMenuItem
                 className="flex justify-between"
@@ -72,9 +68,9 @@ export const TestDetailAction = ({ test }: { test: Experiment }) => {
                 <Trash2 className="w-4 h-4" />
               </DropdownMenuItem>
             </DropdownMenuGroup>
-          )}
-        </DropdownMenuContent>
-      </DropdownMenu>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
 
       <TestAddDialogForm
         open={isOpenForm}

@@ -13,11 +13,12 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 import type { FC } from 'react';
-import { LayoutPanelLeft, Lightbulb } from 'lucide-react';
+import { LayoutPanelLeft, Lightbulb, Settings } from 'lucide-react';
 import { Icons } from '@/components/icons';
 import { ROUTES } from '@/config/routes';
 import { useUser } from '@/components/context/AuthContext';
 import { getInitials } from '@/lib/get-initials';
+import { ACCESS_LEVEL } from '@/lib/contants';
 
 interface ProfileDropdownProps {}
 
@@ -53,6 +54,14 @@ export const ProfileDropdown: FC<ProfileDropdownProps> = ({}) => {
               Panel
             </DropdownMenuItem>
           </Link>
+          {user && user.accessLevel === ACCESS_LEVEL.ACCOUNT_ADMIN && (
+            <Link href={ROUTES.app_settings}>
+              <DropdownMenuItem>
+                <Settings className="w-4 h-4 mr-2" />
+                Configuración
+              </DropdownMenuItem>
+            </Link>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
