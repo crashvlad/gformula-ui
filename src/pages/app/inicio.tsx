@@ -29,6 +29,12 @@ export default function HomePage() {
           <StepItem value={'objectives'} label={'2'} />
           <StepLine />
           <StepItem value={'hipothesis'} label={'3'} />
+          <StepLine />
+          <StepItem value={'dashboard'} label={'4'} />
+          <StepLine />
+          <StepItem value={'salud'} label={'5'} />
+          <StepLine />
+          <StepItem value={'results'} label={'6'} />
         </TabsList>
 
         <TabsContent value="metric">
@@ -68,7 +74,6 @@ export default function HomePage() {
           </Card>
         </TabsContent>
         <TabsContent value="objectives">
-          {' '}
           <Card className="max-w-xl mx-auto">
             <CardHeader>
               <CardTitle className="text-3xl font-extrabold text-center">
@@ -128,6 +133,69 @@ export default function HomePage() {
                 ></iframe>
               </AspectRatio>
             </CardContent>
+            <CardFooter className="flex justify-center">
+              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
+                Comenzar a Experimentar
+                <FlaskConical className="w-4 h-4 ml-2" />
+              </Link>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+        <TabsContent value="dashboard">
+          <Card className="max-w-xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-3xl font-extrabold text-center">
+                Dashboard
+              </CardTitle>
+              <CardDescription>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+                sit nemo saepe soluta omnis delectus consequatur perspiciatis
+                similique vel ab numquam nobis iure mollitia sapiente?
+              </CardDescription>
+            </CardHeader>
+
+            <CardFooter className="flex justify-center">
+              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
+                Comenzar a Experimentar
+                <FlaskConical className="w-4 h-4 ml-2" />
+              </Link>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+        <TabsContent value="salud">
+          <Card className="max-w-xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-3xl font-extrabold text-center">
+                Salud
+              </CardTitle>
+              <CardDescription>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+                sit nemo saepe soluta omnis delectus consequatur perspiciatis
+                similique vel ab numquam nobis iure mollitia sapiente?
+              </CardDescription>
+            </CardHeader>
+
+            <CardFooter className="flex justify-center">
+              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
+                Comenzar a Experimentar
+                <FlaskConical className="w-4 h-4 ml-2" />
+              </Link>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+        <TabsContent value="results">
+          <Card className="max-w-xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-3xl font-extrabold text-center">
+                Resultados
+              </CardTitle>
+              <CardDescription>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+                sit nemo saepe soluta omnis delectus consequatur perspiciatis
+                similique vel ab numquam nobis iure mollitia sapiente?
+              </CardDescription>
+            </CardHeader>
+
             <CardFooter className="flex justify-center">
               <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
                 Comenzar a Experimentar

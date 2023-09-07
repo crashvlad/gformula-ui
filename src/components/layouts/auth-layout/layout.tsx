@@ -5,8 +5,10 @@ import { AuthProvider } from '@/components/context/AuthContext';
 import { driver, Config as DriverConfig } from 'driver.js';
 
 const driverConfiguration: DriverConfig = {
-  showProgress: true,
+  showProgress: false,
   doneBtnText: 'Finalizar',
+  popoverClass: 'driverjs-theme',
+  overlayColor: 'hsl(var(--background) / 0.8)',
   steps: [
     {
       element: '#started-item',

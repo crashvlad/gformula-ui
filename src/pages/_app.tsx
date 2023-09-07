@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import '@/styles/nprogress.css';
 import 'driver.js/dist/driver.css';
+import '@/styles/driver-theme.css';
 
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
