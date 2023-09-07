@@ -30,7 +30,6 @@ export const Header: FC<DashboardHeaderProps> = ({}) => {
 
         <nav className="flex items-center space-x-3">
           <NotificationPopover />
-          <ThemeToggle />
           <ProfileDropdown />
         </nav>
       </header>

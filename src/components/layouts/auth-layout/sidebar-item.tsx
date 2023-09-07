@@ -11,16 +11,18 @@ export interface IListemItem {
   path: string;
   icon: LucideIcon;
   title: string;
+  id?: string;
   requires?: string[];
 }
 
-export function SidebarItem({ path, title, icon: Icon }: IListemItem) {
+export function SidebarItem({ id, path, title, icon: Icon }: IListemItem) {
   const pathname = usePathname();
 
   const active = pathname === path;
 
   return (
     <Link
+      id={id}
       className={cn(
         buttonVariants({ variant: 'ghost' }),
         'hover:bg-primary/50',

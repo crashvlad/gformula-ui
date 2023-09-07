@@ -1,5 +1,6 @@
 import { Layout } from '@/components/layouts/auth-layout';
-import { Button } from '@/components/ui/button';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { buttonVariants } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,102 +9,129 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ROUTES } from '@/config/routes';
 import { cn } from '@/lib/utils';
+import { FlagIcon, FlaskConical } from 'lucide-react';
 import Link from 'next/link';
 export default function HomePage() {
   return (
     <Layout>
+      <HeaderHome />
       <Tabs
         defaultValue="hipothesis"
-        className=" max-w-3xl mx-auto mt-10 w-full"
+        className="w-full max-w-3xl mx-auto mt-10"
       >
-        <TabsList className="w-full gap-5 md:gap-0 flex bg-transparent mb-10">
-          <StepItem value={'hipothesis'} label={'1'} />
-          <Separator
-            orientation="horizontal"
-            className="hidden md:block w-14 bg-primary h-1.5"
-          />
-          <StepItem value={'results'} label={'2'} />
-          <Separator
-            orientation="horizontal"
-            className="hidden md:block w-14 bg-primary h-1.5"
-          />
-          <StepItem value={'metric'} label={'3'} />
-          <Separator
-            orientation="horizontal"
-            className="hidden md:block w-14 bg-primary h-1.5"
-          />
-          <StepItem value={'dashboard'} label={'4'} />
+        <TabsList className="flex w-full gap-5 mb-10 bg-transparent md:gap-0">
+          <StepItem value={'metric'} label={'1'} />
+          <StepLine />
+          <StepItem value={'objectives'} label={'2'} />
+          <StepLine />
+          <StepItem value={'hipothesis'} label={'3'} />
         </TabsList>
 
-        <TabsContent value="hipothesis">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle>Hipótesis</CardTitle>
-              <CardDescription>
-                Crea ideas de experimentación según una hipótesis y describe su
-                impacto en los procesos de crecimiento.
-              </CardDescription>
-            </CardHeader>
-            <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_hypothesis}>
-                <Button>Comienza a experimentar!</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="results">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle>Resultados</CardTitle>
-              <CardDescription>
-                Mira y compara los resultados de los experimentos de tus equipos
-                y aprende de las hipótesis.
-              </CardDescription>
-            </CardHeader>
-            <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_results}>
-                <Button>Ver Resultados!</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-
         <TabsContent value="metric">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle>Métrica Clave</CardTitle>
+          <Card className="max-w-xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-3xl font-extrabold text-center">
+                Métricas Claves
+              </CardTitle>
               <CardDescription>
-                Sigue los objetivos planteados por tus equipos y mide los
-                indicadores clave de los experimentos.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+                sit nemo saepe soluta omnis delectus consequatur perspiciatis
+                similique vel ab numquam nobis iure mollitia sapiente?
               </CardDescription>
             </CardHeader>
-            <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_metric}>
-                <Button>Ver Metricas!</Button>
+
+            <CardContent>
+              <AspectRatio ratio={16 / 8}>
+                <iframe
+                  src="https://www.youtube.com/embed/Wj1qpya4BsA?si=BBuoonlgbWpxAjaQ"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full rounded-lg shadow-lg"
+                ></iframe>
+              </AspectRatio>
+            </CardContent>
+            <CardFooter className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
+                Ver Métricas Claves
+                <FlagIcon className="w-4 h-4 ml-2" />
+              </Link>
+              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
+                Comenzar a Experimentar
+                <FlaskConical className="w-4 h-4 ml-2" />
               </Link>
             </CardFooter>
           </Card>
         </TabsContent>
-
-        <TabsContent value="dashboard">
-          <Card>
-            <CardHeader className="text-center">
-              <CardTitle>Tablero</CardTitle>
+        <TabsContent value="objectives">
+          {' '}
+          <Card className="max-w-xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-3xl font-extrabold text-center">
+                Objetivos
+              </CardTitle>
               <CardDescription>
-                Revisa los reportes para conocer el impacto de las hipótesis y
-                tomar las mejores decisiones.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+                sit nemo saepe soluta omnis delectus consequatur perspiciatis
+                similique vel ab numquam nobis iure mollitia sapiente?
               </CardDescription>
             </CardHeader>
+
+            <CardContent>
+              <AspectRatio ratio={16 / 8}>
+                <iframe
+                  src="https://www.youtube.com/embed/Wj1qpya4BsA?si=BBuoonlgbWpxAjaQ"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full rounded-lg shadow-lg"
+                ></iframe>
+              </AspectRatio>
+            </CardContent>
+            <CardFooter className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <Link href={ROUTES.app_objectives} className={buttonVariants()}>
+                Ver Objetivos
+                <FlagIcon className="w-4 h-4 ml-2" />
+              </Link>
+              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
+                Comenzar a Experimentar
+                <FlaskConical className="w-4 h-4 ml-2" />
+              </Link>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+        <TabsContent value="hipothesis">
+          <Card className="max-w-xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-3xl font-extrabold text-center">
+                Hipotesis
+              </CardTitle>
+              <CardDescription>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+                sit nemo saepe soluta omnis delectus consequatur perspiciatis
+                similique vel ab numquam nobis iure mollitia sapiente?
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent>
+              <AspectRatio ratio={16 / 8}>
+                <iframe
+                  src="https://www.youtube.com/embed/Wj1qpya4BsA?si=BBuoonlgbWpxAjaQ"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full rounded-lg shadow-lg"
+                ></iframe>
+              </AspectRatio>
+            </CardContent>
             <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_dashboard}>
-                <Button>Ver Tablero!</Button>
+              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
+                Comenzar a Experimentar
+                <FlaskConical className="w-4 h-4 ml-2" />
               </Link>
             </CardFooter>
           </Card>
@@ -113,12 +141,34 @@ export default function HomePage() {
   );
 }
 
+const HeaderHome = () => {
+  return (
+    <section id="home-header">
+      <h2 className="mb-2 text-4xl font-extrabold tracking-tight text-center scroll-m-20 lg:text-5xl">
+        Bienvenido a{' '}
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-[#02EEB1]">
+          Growth Formula
+        </span>
+      </h2>
+    </section>
+  );
+};
+
+const StepLine = () => {
+  return (
+    <Separator
+      orientation="horizontal"
+      className="hidden h-1 md:block w-14 bg-primary"
+    />
+  );
+};
+
 const StepItem = ({ label, value }: { label: string; value: string }) => {
   return (
     <TabsTrigger
       value={value}
       className={cn(
-        'rounded-full border text-xl !text-primary border-primary h-10 md:h-14 w-10 md:w-14 data-[state=active]:bg-primary data-[state=active]:!text-background'
+        'rounded-full border text-xl !text-primary border-primary h-10 md:h-12 w-10 md:w-12 data-[state=active]:bg-primary data-[state=active]:!text-background'
       )}
     >
       {label}

@@ -34,7 +34,7 @@ export function NotificationPopover() {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild id={'notification-item'}>
         <Button
           aria-label="Cart"
           variant="outline"
