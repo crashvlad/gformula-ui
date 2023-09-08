@@ -7,9 +7,6 @@ import { Pricing } from '@/components/landing/Pricing';
 import { PrimaryFeatures } from '@/components/landing/PrimaryFeatures';
 import { SecondaryFeatures } from '@/components/landing/SecondaryFeatures';
 import { Testimonials } from '@/components/landing/Testimonials';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Fragment } from 'react';
 
 export default function LandingPage() {
   return (

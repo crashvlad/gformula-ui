@@ -1,245 +1,88 @@
 import { Layout } from '@/components/layouts/auth-layout';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { buttonVariants } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  OnboardingProfileCard,
+  OnboardingSteps,
+} from '@/components/modules/onboarding';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+
+import codingIcon from '@/images/icons/coding-icon.svg';
+import featureIcon from '@/images/icons/feature-icon.svg';
 import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ROUTES } from '@/config/routes';
-import { cn } from '@/lib/utils';
-import { FlagIcon, FlaskConical } from 'lucide-react';
 import Link from 'next/link';
 export default function HomePage() {
   return (
     <Layout>
-      <HeaderHome />
-      <Tabs
-        defaultValue="hipothesis"
-        className="w-full max-w-3xl mx-auto mt-10"
-      >
-        <TabsList className="flex w-full gap-5 mb-10 bg-transparent md:gap-0">
-          <StepItem value={'metric'} label={'1'} />
-          <StepLine />
-          <StepItem value={'objectives'} label={'2'} />
-          <StepLine />
-          <StepItem value={'hipothesis'} label={'3'} />
-          <StepLine />
-          <StepItem value={'dashboard'} label={'4'} />
-          <StepLine />
-          <StepItem value={'salud'} label={'5'} />
-          <StepLine />
-          <StepItem value={'results'} label={'6'} />
-        </TabsList>
+      <div className="grid items-start gap-5 md:grid-cols-12">
+        <div className="flex flex-col gap-5 md:col-span-7">
+          <OnboardingProfileCard />
 
-        <TabsContent value="metric">
-          <Card className="max-w-xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-3xl font-extrabold text-center">
-                Métricas Claves
-              </CardTitle>
-              <CardDescription>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                sit nemo saepe soluta omnis delectus consequatur perspiciatis
-                similique vel ab numquam nobis iure mollitia sapiente?
-              </CardDescription>
-            </CardHeader>
+          <Card>
+            <CardContent className="p-8">
+              <div className="flex flex-col items-center gap-5 md:flex-row">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-medium">1. Install our SDK</h3>
+                  <p className="text-base">
+                    Integrate GrowthBook into your Javascript, React, Golang,
+                    Ruby, PHP, Python, or Android application. More languages
+                    and frameworks coming soon!
+                  </p>
+                  <Button rigthIcon={ArrowRight}>Click</Button>
+                </div>
 
-            <CardContent>
-              <AspectRatio ratio={16 / 8}>
-                <iframe
-                  src="https://www.youtube.com/embed/Wj1qpya4BsA?si=BBuoonlgbWpxAjaQ"
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full rounded-lg shadow-lg"
-                ></iframe>
-              </AspectRatio>
+                <Image
+                  src={codingIcon}
+                  alt="Coding Logo"
+                  className="w-48 h-48"
+                />
+              </div>
+
+              <Separator className="my-8" />
+
+              <div className="flex flex-col items-center gap-5 md:flex-row">
+                <Image
+                  src={featureIcon}
+                  alt="Coding Logo"
+                  className="w-48 h-48"
+                />
+                <div className="space-y-4">
+                  <h3 className="text-lg font-medium">1. Install our SDK</h3>
+                  <p className="text-base">
+                    Integrate GrowthBook into your Javascript, React, Golang,
+                    Ruby, PHP, Python, or Android application. More languages
+                    and frameworks coming soon!
+                  </p>
+                  <Button rigthIcon={ArrowRight}>Click</Button>
+                </div>
+              </div>
+              <Separator className="my-8" />
+              <div>
+                <h3 className="mb-3 text-lg font-medium">Siguientes Pasos</h3>
+                <ul className="pl-8 space-y-3 list-disc">
+                  <li>
+                    <Link className="underline text-primary" href="/">
+                      Externar or Internal Link
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="underline text-primary" href="/">
+                      Externar or Internal Link
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="underline text-primary" href="/">
+                      Externar or Internal Link
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </CardContent>
-            <CardFooter className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
-                Ver Métricas Claves
-                <FlagIcon className="w-4 h-4 ml-2" />
-              </Link>
-              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
-                Comenzar a Experimentar
-                <FlaskConical className="w-4 h-4 ml-2" />
-              </Link>
-            </CardFooter>
           </Card>
-        </TabsContent>
-        <TabsContent value="objectives">
-          <Card className="max-w-xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-3xl font-extrabold text-center">
-                Objetivos
-              </CardTitle>
-              <CardDescription>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                sit nemo saepe soluta omnis delectus consequatur perspiciatis
-                similique vel ab numquam nobis iure mollitia sapiente?
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <AspectRatio ratio={16 / 8}>
-                <iframe
-                  src="https://www.youtube.com/embed/Wj1qpya4BsA?si=BBuoonlgbWpxAjaQ"
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full rounded-lg shadow-lg"
-                ></iframe>
-              </AspectRatio>
-            </CardContent>
-            <CardFooter className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              <Link href={ROUTES.app_objectives} className={buttonVariants()}>
-                Ver Objetivos
-                <FlagIcon className="w-4 h-4 ml-2" />
-              </Link>
-              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
-                Comenzar a Experimentar
-                <FlaskConical className="w-4 h-4 ml-2" />
-              </Link>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="hipothesis">
-          <Card className="max-w-xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-3xl font-extrabold text-center">
-                Hipotesis
-              </CardTitle>
-              <CardDescription>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                sit nemo saepe soluta omnis delectus consequatur perspiciatis
-                similique vel ab numquam nobis iure mollitia sapiente?
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <AspectRatio ratio={16 / 8}>
-                <iframe
-                  src="https://www.youtube.com/embed/Wj1qpya4BsA?si=BBuoonlgbWpxAjaQ"
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full rounded-lg shadow-lg"
-                ></iframe>
-              </AspectRatio>
-            </CardContent>
-            <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
-                Comenzar a Experimentar
-                <FlaskConical className="w-4 h-4 ml-2" />
-              </Link>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="dashboard">
-          <Card className="max-w-xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-3xl font-extrabold text-center">
-                Dashboard
-              </CardTitle>
-              <CardDescription>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                sit nemo saepe soluta omnis delectus consequatur perspiciatis
-                similique vel ab numquam nobis iure mollitia sapiente?
-              </CardDescription>
-            </CardHeader>
-
-            <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
-                Comenzar a Experimentar
-                <FlaskConical className="w-4 h-4 ml-2" />
-              </Link>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="salud">
-          <Card className="max-w-xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-3xl font-extrabold text-center">
-                Salud
-              </CardTitle>
-              <CardDescription>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                sit nemo saepe soluta omnis delectus consequatur perspiciatis
-                similique vel ab numquam nobis iure mollitia sapiente?
-              </CardDescription>
-            </CardHeader>
-
-            <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
-                Comenzar a Experimentar
-                <FlaskConical className="w-4 h-4 ml-2" />
-              </Link>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="results">
-          <Card className="max-w-xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-3xl font-extrabold text-center">
-                Resultados
-              </CardTitle>
-              <CardDescription>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                sit nemo saepe soluta omnis delectus consequatur perspiciatis
-                similique vel ab numquam nobis iure mollitia sapiente?
-              </CardDescription>
-            </CardHeader>
-
-            <CardFooter className="flex justify-center">
-              <Link href={ROUTES.app_hypothesis} className={buttonVariants()}>
-                Comenzar a Experimentar
-                <FlaskConical className="w-4 h-4 ml-2" />
-              </Link>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-      </Tabs>
+        </div>
+        <OnboardingSteps />
+      </div>
     </Layout>
   );
 }
-
-const HeaderHome = () => {
-  return (
-    <section id="home-header">
-      <h2 className="mb-2 text-4xl font-extrabold tracking-tight text-center scroll-m-20 lg:text-5xl">
-        Bienvenido a{' '}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-[#02EEB1]">
-          Growth Formula
-        </span>
-      </h2>
-    </section>
-  );
-};
-
-const StepLine = () => {
-  return (
-    <Separator
-      orientation="horizontal"
-      className="hidden h-1 md:block w-14 bg-primary"
-    />
-  );
-};
-
-const StepItem = ({ label, value }: { label: string; value: string }) => {
-  return (
-    <TabsTrigger
-      value={value}
-      className={cn(
-        'rounded-full border text-xl !text-primary border-primary h-10 md:h-12 w-10 md:w-12 data-[state=active]:bg-primary data-[state=active]:!text-background'
-      )}
-    >
-      {label}
-    </TabsTrigger>
-  );
-};
