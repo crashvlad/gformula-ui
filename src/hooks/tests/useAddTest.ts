@@ -1,6 +1,7 @@
 import { toast } from '@/components/ui/use-toast';
 import { authApi } from '@/lib/auth-api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 
 async function fetchAddTest(formData: any) {
   const body = { ...formData };
@@ -15,6 +16,7 @@ async function fetchAddTest(formData: any) {
 
 export function useAddTest() {
   const clientQuery = useQueryClient();
+  const router = useRouter();
 
   return useMutation(fetchAddTest, {
     onSettled: () => clientQuery.invalidateQueries({ queryKey: ['tests'] }),

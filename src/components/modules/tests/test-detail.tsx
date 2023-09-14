@@ -9,22 +9,23 @@ import {
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
-import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetTest } from '@/hooks/tests';
 import { useGetVote, useGetVotes, useUpdateVote } from '@/hooks/votes';
-import { ACCESS_LEVEL, SALES_PROCESS_IMPACT_DICTIONARY } from '@/lib/contants';
+import {
+  ACCESS_LEVEL,
+  SALES_PROCESS_IMPACT_DICTIONARY,
+  TEST_STATUS_DICTIONARY,
+} from '@/lib/contants';
 import { getFormatDateDistance } from '@/lib/date';
-import { cn } from '@/lib/utils';
-import { ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { TestExperimentationDialogForm } from './test-experimentation-detail-dialog-form';
 import { TestResultDialogForm } from './test-result-dialog-form';
 import { useUser } from '@/components/context/AuthContext';
+import { TestDetailVotes } from './test-detail-votes';
 export function TestDetail() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
-  const updateVoteMutation = useUpdateVote();
 
   const { data, isLoading } = useGetTest(Number(id), Boolean(id));
   const { data: dataVote, refetch: refetchVote } = useGetVote(id);
@@ -64,58 +65,17 @@ export function TestDetail() {
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Badge>{SALES_PROCESS_IMPACT_DICTIONARY[data.type]}</Badge>
               <Badge className="uppercase">{data.targetArea}</Badge>
-              <Badge>{data.status}</Badge>
+              <Badge>{TEST_STATUS_DICTIONARY[data.status]}</Badge>
 
-              <div className="flex items-center border rounded-full">
-                <button
-                  className="px-3 py-1.5 flex "
-                  disabled={updateVoteMutation.isLoading}
-                  onClick={() => {
-                    updateVoteMutation.mutate(
-                      { id, value: 1 },
-                      {
-                        onSuccess: () => {
-                          refetchVote();
-                          refetchVotes();
-                        },
-                      }
-                    );
-                  }}
-                >
-                  <ThumbsUp
-                    className={cn(
-                      'w-5 h-5 mr-2',
-                      dataVote?.data?.value === 1 && 'fill-current'
-                    )}
-                  />
-                  <span>{dataVotes?.data?.length}</span>
-                </button>
-
-                <Separator orientation="vertical" className="h-6" />
-
-                <button
-                  className="px-3 py-1.5"
-                  disabled={updateVoteMutation.isLoading}
-                  onClick={() => {
-                    updateVoteMutation.mutate(
-                      { id, value: -1 },
-                      {
-                        onSuccess: () => {
-                          refetchVote();
-                          refetchVotes();
-                        },
-                      }
-                    );
-                  }}
-                >
-                  <ThumbsDown
-                    className={cn(
-                      'w-5 h-5 mr-2',
-                      dataVote?.data?.value === -1 && 'fill-current'
-                    )}
-                  />
-                </button>
-              </div>
+              <TestDetailVotes
+                id={id}
+                totalVotes={totalVotesCount}
+                voteValue={dataVote?.data?.value ?? 0}
+                afterMutation={() => {
+                  refetchVote();
+                  refetchVotes();
+                }}
+              />
             </div>
 
             <div className="space-y-3">

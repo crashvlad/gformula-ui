@@ -62,7 +62,7 @@ export default function ResultAppPage() {
       <PageHeading
         title="Preguntas Frecuentes"
         description={
-          <p>
+          <p className="text-muted-foreground">
             ¿Tienes una pregunta diferente y no puedes encontrar la respuesta
             que estás buscando? Ponte en contacto con nuestro equipo de soporte
             enviándonos un{' '}

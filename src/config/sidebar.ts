@@ -1,11 +1,9 @@
 import {
-  ArrowUp,
   BarChart,
   FileText,
   Flag,
   Heart,
   Home,
-  HomeIcon,
   LayoutPanelLeft,
   Lightbulb,
 } from 'lucide-react';
@@ -34,7 +32,7 @@ export const sidebarConfig = [
     id: 'hypothesis-item',
     icon: Lightbulb,
     title: 'Hipótesis',
-    path: ROUTES.app_hypothesis,
+    path: `${ROUTES.app_hypothesis}`,
   },
 
   {

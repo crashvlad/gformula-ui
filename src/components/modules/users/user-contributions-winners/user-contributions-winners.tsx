@@ -7,11 +7,11 @@ export const UserContributionsWinners = () => {
   const winnersData = data?.winnersData ?? [];
 
   return (
-    <div className="grid md:grid-cols-3 gap-5 mb-8">
+    <div className="grid gap-5 mb-8 md:grid-cols-3">
       {!isLoading &&
-        winnersData.length > 0 &&
-        winnersData.map((w) => (
+        winnersData.map((w, i) => (
           <UserWinnerCard
+            index={i + 1}
             key={w.id}
             name={w.name}
             job={w.job}

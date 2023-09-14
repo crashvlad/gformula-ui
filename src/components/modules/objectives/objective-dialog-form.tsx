@@ -34,7 +34,7 @@ import { useGetMetrics } from '@/hooks/metrics';
 import { useEffect, useMemo } from 'react';
 
 export const objectiveFormSchema = z.object({
-  name: z.string().min(2).max(50),
+  name: z.string().min(2),
   type: z.string().min(5),
   description: z.string().min(10),
   metricId: z.string().min(1),

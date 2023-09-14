@@ -3,11 +3,14 @@ import { AreasTable } from '@/components/modules/areas';
 import { UsersTable } from '@/components/modules/users';
 
 import { PageHeading } from '@/components/ui/page-heading';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useGetUsers } from '@/hooks/users';
+import { useTabsRouteState } from '@/hooks/useTabsRouteState';
 
 export default function SettingsPage() {
+  const { handleTabChange, activeTab } = useTabsRouteState({
+    defaultValue: 'users',
+  });
+
   return (
     <Layout>
       <PageHeading
@@ -15,7 +18,11 @@ export default function SettingsPage() {
         description="Aquí podrás configurar tu equipo y aréas de trabajo"
       />
 
-      <Tabs defaultValue="users">
+      <Tabs
+        value={activeTab}
+        defaultValue={activeTab}
+        onValueChange={handleTabChange}
+      >
         <TabsList className="mb-4">
           <TabsTrigger value="users">Usuarios</TabsTrigger>
           <TabsTrigger value="areas">Aréas de trabajo</TabsTrigger>

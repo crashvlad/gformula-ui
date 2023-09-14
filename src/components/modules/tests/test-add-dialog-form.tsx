@@ -3,10 +3,8 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,16 +12,15 @@ import { useForm } from 'react-hook-form';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormTooltipInfo,
 } from '@/components/ui/form';
 
 import * as z from 'zod';
-import { useState } from 'react';
-import { InfoIcon, Plus } from 'lucide-react';
+import { HelpCircle, InfoIcon } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -43,12 +40,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useRouter } from 'next/router';
+import { ROUTES } from '@/config/routes';
+import { TABS_LIST } from '.';
 
-export const testAddForm = z.object({
+const testAddForm = z.object({
   name: z
     .string({ required_error: 'Este campo es obligatorio' })
-    .min(2, { message: 'El nombre debe tener al menos 2 caracteres' })
-    .max(50, { message: 'El nombre no debe exceder los 50 caracteres' }),
+    .min(2, { message: 'El nombre debe tener al menos 2 caracteres' }),
   description: z
     .string({ required_error: 'Este campo es obligatorio' })
     .min(10, { message: 'La descripción debe tener al menos 10 caracteres' }),
@@ -91,6 +90,7 @@ export function TestAddDialogForm({
 }) {
   const addMutation = useAddTest();
   const updateMutation = useUpdateTest();
+  const router = useRouter();
 
   const { areasOptions } = useGetAreas();
   const { optionsObjectives } = useGetObjectives();
@@ -126,7 +126,10 @@ export function TestAddDialogForm({
       );
     } else {
       await addMutation.mutateAsync(payload, {
-        onSuccess: () => afterMutation(),
+        onSuccess: () => {
+          router.push(`${ROUTES.app_hypothesis}?tab=${TABS_LIST.IDEA}`);
+          afterMutation();
+        },
       });
     }
   }
@@ -147,22 +150,9 @@ export function TestAddDialogForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="flex items-center gap-3">
+                    <FormLabel className="flex items-end gap-3">
                       Nombre
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <InfoIcon className="h-5 w-5" />
-                          </TooltipTrigger>
-                          <TooltipContent align="start" className="w-44">
-                            <p>
-                              Lorem ipsum dolor sit amet Lorem ipsum dolor, sit
-                              amet consectetur adipisicing elit. Corrupti
-                              voluptate debitis minima?{' '}
-                            </p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
+                      <FormTooltipInfo />
                     </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="" />
@@ -180,7 +170,10 @@ export function TestAddDialogForm({
                 name="objectiveId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>¿Que objetivo impactará?</FormLabel>
+                    <FormLabel className="flex items-end gap-3">
+                      ¿Que objetivo impactará?{' '}
+                      <FormTooltipInfo description="Seleccion a que objetivo afectara esta hipotesis" />
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -208,7 +201,9 @@ export function TestAddDialogForm({
                 name="targetArea"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>¿Que área de trabajo impactará?</FormLabel>
+                    <FormLabel className="flex items-end gap-3">
+                      ¿Que área de trabajo impactará? <FormTooltipInfo />
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -236,7 +231,9 @@ export function TestAddDialogForm({
                 name="type"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Área de Impacto</FormLabel>
+                    <FormLabel className="flex items-end gap-3">
+                      Área de Impacto <FormTooltipInfo />
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -267,9 +264,24 @@ export function TestAddDialogForm({
                 name="difficulty"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Dificultad</FormLabel>
+                    <FormLabel className="flex items-end gap-3">
+                      Dificultad <FormTooltipInfo />
+                    </FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" placeholder="" />
+                      <Input
+                        {...field}
+                        type="number"
+                        inputMode="numeric"
+                        onChange={(e) => {
+                          const value = e.target.valueAsNumber;
+
+                          if (value > 10) {
+                            e.target.valueAsNumber = 0;
+                          }
+
+                          field.onChange(e);
+                        }}
+                      />
                     </FormControl>
 
                     <FormMessage />
@@ -281,9 +293,24 @@ export function TestAddDialogForm({
                 name="impact"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Impacto</FormLabel>
+                    <FormLabel className="flex items-end gap-3">
+                      Impacto <FormTooltipInfo />
+                    </FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" placeholder="" />
+                      <Input
+                        {...field}
+                        type="number"
+                        inputMode="numeric"
+                        onChange={(e) => {
+                          const value = e.target.valueAsNumber;
+
+                          if (value > 10) {
+                            e.target.valueAsNumber = 0;
+                          }
+
+                          field.onChange(e);
+                        }}
+                      />
                     </FormControl>
 
                     <FormMessage />
@@ -295,9 +322,24 @@ export function TestAddDialogForm({
                 name="confidence"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confianza</FormLabel>
+                    <FormLabel className="flex items-end gap-3">
+                      Confianza <FormTooltipInfo />
+                    </FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" placeholder="" />
+                      <Input
+                        {...field}
+                        type="number"
+                        inputMode="numeric"
+                        onChange={(e) => {
+                          const value = e.target.valueAsNumber;
+
+                          if (value > 10) {
+                            e.target.valueAsNumber = 0;
+                          }
+
+                          field.onChange(e);
+                        }}
+                      />
                     </FormControl>
 
                     <FormMessage />
@@ -311,7 +353,9 @@ export function TestAddDialogForm({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Descripción</FormLabel>
+                  <FormLabel className="flex items-end gap-3">
+                    Descripción <FormTooltipInfo />
+                  </FormLabel>
                   <FormControl>
                     <Textarea {...field} rows={5} placeholder="" />
                   </FormControl>

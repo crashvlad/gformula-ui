@@ -53,7 +53,9 @@ export const TestListCard = ({ test }: { test: Experiment }) => {
   return (
     <Card className="flex flex-col h-full px-0">
       <CardHeader>
-        <CardTitle className="line-clamp-1">{test.name}</CardTitle>
+        <Link href={ROUTES.app_hypothesis_detail(test.id)}>
+          <CardTitle className="hover:underline">{test.name}</CardTitle>
+        </Link>
         <CardDescription>
           Creado por {test.creator.name}
           <br />

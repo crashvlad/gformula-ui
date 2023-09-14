@@ -7,20 +7,39 @@ import { Plus, RefreshCcw } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { TestAddDialogForm } from '../test-add-dialog-form';
 import { TestListCard } from './test-list-card';
+import { TestListFilterForm } from './test-list-filter-form';
+import { useSearchParams } from 'next/navigation';
 
 export const TestsList = ({ status }) => {
+  const searchParams = useSearchParams();
+
+  const type = searchParams?.get('type') ?? '';
+  const resultStatus = searchParams?.get('resultStatus') ?? '';
+  const startDate = searchParams?.get('startDate') ?? '';
+  const endDate = searchParams?.get('endDate') ?? '';
+
   const { isLoading, tests, refetch, isRefetching } = useGetTests({
     status,
+    filter: {
+      type,
+      resultStatus,
+      startDate,
+      endDate,
+    },
   });
   const [query, setQuery] = useState('');
   const [isOpenForm, setIsOpenForm] = useState(false);
 
   const filteredTests = useMemo(() => {
-    return query != null && query.length > 0
-      ? tests.filter((user) => {
-          return user.name?.toLowerCase().includes(query.toLowerCase());
-        })
-      : tests;
+    let filtered = tests;
+
+    if (query) {
+      filtered = tests.filter((user) => {
+        return user.name?.toLowerCase().includes(query.toLowerCase());
+      });
+    }
+
+    return filtered;
   }, [tests, query]);
 
   return (
@@ -33,17 +52,18 @@ export const TestsList = ({ status }) => {
           className="max-w-xs"
         />
 
-        <div className="flex gap-5">
+        <div className="flex gap-3">
           <Button leftIcon={Plus} onClick={() => setIsOpenForm(true)}>
             Añadir
           </Button>
+
+          <TestListFilterForm />
 
           <TestAddDialogForm
             open={isOpenForm}
             handleOpenChange={(value) => setIsOpenForm(value)}
             afterMutation={() => setIsOpenForm(false)}
           />
-
           <Button
             variant={'outline'}
             disabled={isRefetching}

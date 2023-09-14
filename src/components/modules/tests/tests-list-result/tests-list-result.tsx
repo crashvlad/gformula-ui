@@ -3,37 +3,12 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetTests } from '@/hooks/tests';
 import { cn } from '@/lib/utils';
-import { FilterIcon, Plus, RefreshCcw } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { TestListResultCard } from './test-list-result-card';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { RESULTS_OPTIONS, SALES_PROCESS_IMPACT_OPTIONS } from '@/lib/contants';
+import { RefreshCcw } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { useCreateQueryString } from '@/hooks/useCreateQueryString';
-import { useRouter } from 'next/router';
-import { ROUTES } from '@/config/routes';
+import { useMemo, useState } from 'react';
+import { z } from 'zod';
+import { TestListResultCard } from './test-list-result-card';
+import { TestListResultFilterForm } from './test-list-result-filter-form';
 
 const testEditSchema = z.object({
   resultStatus: z.string(),
@@ -43,9 +18,7 @@ const testEditSchema = z.object({
 });
 
 export const TestsListResult = ({}) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const { createQueryString } = useCreateQueryString();
 
   const type = searchParams?.get('type') ?? '';
   const resultStatus = searchParams?.get('resultStatus') ?? '';
@@ -63,10 +36,6 @@ export const TestsListResult = ({}) => {
   });
   const [query, setQuery] = useState('');
 
-  const form = useForm<z.infer<typeof testEditSchema>>({
-    resolver: zodResolver(testEditSchema),
-  });
-
   const filteredTests = useMemo(() => {
     return query != null && query.length > 0
       ? tests.filter((user) => {
@@ -74,8 +43,6 @@ export const TestsListResult = ({}) => {
         })
       : tests;
   }, [tests, query]);
-
-  async function onSubmit(values: z.infer<typeof testEditSchema>) {}
 
   return (
     <div className="mt-6 space-y-8">
@@ -88,162 +55,7 @@ export const TestsListResult = ({}) => {
         />
 
         <div className="flex gap-5">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button className="ml-auto">
-                Filtros <FilterIcon className="w-4 h-4 ml-2" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-96" align="end">
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-8"
-                >
-                  <FormField
-                    control={form.control}
-                    name="resultStatus"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Tipo</FormLabel>
-                        <Select
-                          onValueChange={(e) => {
-                            field.onChange(e);
-
-                            router.push(
-                              `${router.pathname}?${createQueryString({
-                                type: e,
-                              })}`
-                            );
-                          }}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Selecciona una opción" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {SALES_PROCESS_IMPACT_OPTIONS.map((s) => (
-                              <SelectItem value={s.value} key={s.id}>
-                                {s.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="resultStatus"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Resultado </FormLabel>
-                        <Select
-                          onValueChange={(e) => {
-                            field.onChange(e);
-
-                            router.push(
-                              `${router.pathname}?${createQueryString({
-                                resultStatus: e,
-                              })}`
-                            );
-                          }}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Selecciona una opción" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {RESULTS_OPTIONS.map((s) => (
-                              <SelectItem value={s.value} key={s.id}>
-                                {s.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="grid space-y-8 md:space-y-0 md:gap-5 md:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="startDate"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Desde</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              onChange={(e) => {
-                                field.onChange(e.target.value);
-
-                                router.push(
-                                  `${router.pathname}?${createQueryString({
-                                    startDate: e.target.value,
-                                  })}`
-                                );
-                              }}
-                              type="date"
-                              placeholder=""
-                            />
-                          </FormControl>
-
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="endDate"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Hasta</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              onChange={(e) => {
-                                field.onChange(e.target.value);
-
-                                router.push(
-                                  `${router.pathname}?${createQueryString({
-                                    endDate: e.target.value,
-                                  })}`
-                                );
-                              }}
-                              type="date"
-                              placeholder=""
-                            />
-                          </FormControl>
-
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="flex justify-end gap-3">
-                    <Button
-                      type="button"
-                      onClick={(e) => {
-                        router.push(ROUTES.app_results);
-                      }}
-                    >
-                      Limpiar Filtros
-                    </Button>
-                  </div>
-                </form>
-              </Form>
-            </PopoverContent>
-          </Popover>
+          <TestListResultFilterForm />
 
           <Button
             variant={'outline'}

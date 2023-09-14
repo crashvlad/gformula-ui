@@ -5,12 +5,13 @@ import { type FC } from 'react';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import { NotificationPopover } from './notification-popover';
-import { Settings, Settings2 } from 'lucide-react';
+import { HelpCircle, Settings, Settings2 } from 'lucide-react';
 import Link from 'next/link';
 import { ROUTES } from '@/config/routes';
 import { useUser } from '@/components/context/AuthContext';
 import { ACCESS_LEVEL } from '@/lib/contants';
 import { MobileSidebar } from './mobile-sidebar';
+import { FeedbackForm } from './feedback-form';
 
 interface DashboardHeaderProps {}
 
@@ -29,6 +30,13 @@ export const Header: FC<DashboardHeaderProps> = ({}) => {
         </nav>
 
         <nav className="flex items-center space-x-3">
+          <FeedbackForm />
+          <Link
+            className={buttonVariants({ variant: 'outline', size: 'sm' })}
+            href={ROUTES.faq}
+          >
+            <HelpCircle />
+          </Link>
           <NotificationPopover />
           <ProfileDropdown />
         </nav>

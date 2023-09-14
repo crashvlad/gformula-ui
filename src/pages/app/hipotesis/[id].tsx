@@ -7,13 +7,14 @@ import { ROUTES } from '@/config/routes';
 import { useSearchParams } from 'next/navigation';
 import { useGetTest } from '@/hooks/tests';
 import {
+  TABS_LIST,
   TestComments,
   TestDetail,
   TestDetailAction,
 } from '@/components/modules/tests';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { RESULTS_OPTIONS, RESULTS_OPTIONS_DICTIONARY } from '@/lib/contants';
+import { RESULTS_OPTIONS_DICTIONARY } from '@/lib/contants';
 
 export default function TestDetailPage() {
   const searchParams = useSearchParams();
@@ -25,7 +26,7 @@ export default function TestDetailPage() {
     <Layout>
       <PageHeading title="Detalle Hipótesis">
         <Link
-          href={ROUTES.app_hypothesis}
+          href={`${ROUTES.app_hypothesis}?tab=${TABS_LIST[data?.status]}`}
           className={buttonVariants({ variant: 'outline' })}
         >
           <ArrowLeft className="w-5 h-5 mr-2" /> Regresar
@@ -47,11 +48,11 @@ export default function TestDetailPage() {
 
               <CardContent>
                 <p>
-                  <span className="font-medium text-lg">Estado: </span>
+                  <span className="text-lg font-medium">Estado: </span>
                   {RESULTS_OPTIONS_DICTIONARY[data?.resultStatus]}
                 </p>
                 <p>
-                  <span className="font-medium text-lg">Descripción: </span>
+                  <span className="text-lg font-medium">Descripción: </span>
                   {data?.results}
                 </p>
               </CardContent>

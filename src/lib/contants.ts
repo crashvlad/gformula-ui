@@ -22,6 +22,13 @@ export const SALES_PROCESS_IMPACT_OPTIONS = [
   { id: 5, value: 'MONETIZATION', label: 'MONETIZACIÓN' },
 ];
 
+export const TEST_STATUS_DICTIONARY = {
+  IDEA: 'HIPÓTESIS',
+  TEST: 'EXPERIMENTACIÓN',
+  COMPLETED: 'RESULTADOS',
+  CLOSED: 'ARCHIVADOS',
+};
+
 export const RESULTS_OPTIONS = [
   { id: 1, value: 'NOT_WORK', label: 'No Funcionó' },
   { id: 2, value: 'WORK', label: 'Funcionó' },
