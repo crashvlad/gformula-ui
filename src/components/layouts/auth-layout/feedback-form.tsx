@@ -12,23 +12,34 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
+import { useAddFeedback } from '@/hooks/support/useAddFeedback';
+import { useState } from 'react';
 
 const testEditSchema = z.object({
-  description: z.string(),
+  content: z.string(),
 });
 
 export const FeedbackForm = () => {
+  const { mutate, isLoading } = useAddFeedback();
   const form = useForm<z.infer<typeof testEditSchema>>({
     resolver: zodResolver(testEditSchema),
   });
 
   async function onSubmit(values: z.infer<typeof testEditSchema>) {
-    toast({ title: 'Feeback enviado' });
+    mutate(
+      { content: values.content },
+      {
+        onSuccess: () => {
+          form.reset();
+        },
+      }
+    );
   }
+
+  const loading = isLoading || form.formState.isSubmitting;
 
   return (
     <Popover>
@@ -42,12 +53,12 @@ export const FeedbackForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
-              name="description"
+              name="content"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <Textarea
-                      placeholder="Your feedback"
+                      placeholder="Déjanos tu feedback"
                       className="resize-none"
                       {...field}
                     />
@@ -59,7 +70,9 @@ export const FeedbackForm = () => {
             />
 
             <div className="flex justify-end gap-3">
-              <Button size="sm">Enviar</Button>
+              <Button loading={loading} disabled={loading} size="sm">
+                Enviar
+              </Button>
             </div>
           </form>
         </Form>

@@ -1,6 +1,6 @@
 export const ROUTES = {
   login: '/login',
-  faq: '//app/preguntas-frecuentes',
+  faq: '/app/preguntas-frecuentes',
   app_dashboard: '/app/panel',
   app_settings: '/app/configuracion',
   app_home: '/app/inicio',

@@ -8,25 +8,38 @@ import {
 } from '@/components/modules/dashboard';
 import { PageHeading } from '@/components/ui/page-heading';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useTabsRouteState } from '@/hooks/useTabsRouteState';
 
-export default function HomeAppPage() {
+export default function DashboardAppPage() {
+  const { handleTabChange, activeTab } = useTabsRouteState({
+    defaultValue: 'cross-experimentation',
+  });
+
   return (
     <Layout>
       <PageHeading title="Dashboard" description="Descripcion de prueba" />
 
-      <Tabs defaultValue="cross-experimentation" className="">
-        <TabsList className="grid w-full grid-cols-5 mb-6">
-          <TabsTrigger value="cross-experimentation">
+      <Tabs
+        value={activeTab}
+        defaultValue={activeTab}
+        onValueChange={handleTabChange}
+      >
+        <TabsList className="grid items-center w-full h-auto grid-cols-3 mb-6 place-content-center">
+          <TabsTrigger value="cross-experimentation" className="px-3 py-2">
             Experimentación Cross Funcional
           </TabsTrigger>
-          <TabsTrigger value="cross-interaction">
+          <TabsTrigger value="cross-interaction" className="px-3 py-2">
             Interacción Cross Funcional
           </TabsTrigger>
-          <TabsTrigger value="exp-objective">
+          <TabsTrigger value="exp-objective" className="px-3 py-2">
             Experimentación por Objetivo
           </TabsTrigger>
-          <TabsTrigger value="exp-area">Experimentación por Área</TabsTrigger>
-          <TabsTrigger value="growth-health">Growth Health</TabsTrigger>
+          <TabsTrigger value="exp-area" className="px-3 py-2">
+            Experimentación por Área
+          </TabsTrigger>
+          <TabsTrigger value="growth-health" className="px-3 py-2">
+            Growth Health
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="cross-experimentation">

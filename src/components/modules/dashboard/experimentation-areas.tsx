@@ -1,8 +1,18 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetAreaExperimentationData } from '@/hooks/dashboard';
+import { shortenText } from '@/lib/utils';
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 export const ExperimentationAreas = () => {
   const { data, isLoading } = useGetAreaExperimentationData();
@@ -14,23 +24,45 @@ export const ExperimentationAreas = () => {
       {!isLoading && experimentationData.length > 0 && (
         <Card>
           <CardContent className="p-6">
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" aspect={3}>
               <BarChart data={experimentationData}>
                 <XAxis
                   dataKey="name"
-                  stroke="#888888"
+                  stroke="hsl(var(--muted-foreground))"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
+                  tickFormatter={(label) => {
+                    return shortenText(label, 15);
+                  }}
                 />
                 <YAxis
-                  stroke="#888888"
+                  stroke="hsl(var(--muted-foreground))"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
-                  tickFormatter={(value) => `${value}`}
+                  allowDecimals={false}
+                  type="number"
+                  domain={['dataMin', 'dataMax']}
                 />
-                <Bar dataKey="total" fill="#02EEB1" radius={[4, 4, 0, 0]} />
+                <CartesianGrid
+                  strokeDasharray="4 1 2"
+                  stroke="hsl(var(--muted))"
+                />
+                <Bar
+                  dataKey="total"
+                  fill="hsl(var(--primary))"
+                  radius={[4, 4, 0, 0]}
+                />
+                <Legend
+                  formatter={(e) => {
+                    return e.toUpperCase();
+                  }}
+                />
+                <Tooltip
+                  content={CustomTooltip}
+                  cursor={{ fill: 'transparent' }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -38,4 +70,24 @@ export const ExperimentationAreas = () => {
       )}
     </>
   );
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="p-3 rounded-lg bg-background">
+        <p className="label">{`${label}`}</p>
+        <div>
+          {payload.map((pld) => (
+            <div key={pld.value} className="flex gap-2">
+              <div className="font-medium capitalize">{pld.dataKey}:</div>
+              <div className="text-primary">{pld.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 };

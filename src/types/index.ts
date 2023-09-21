@@ -84,3 +84,9 @@ export const experimentValidator = z.object({
 export type Experiment = z.infer<typeof experimentValidator>;
 
 export const experimentArrayValidator = z.array(experimentValidator);
+
+declare global {
+  interface Window {
+    gtag: Function;
+  }
+}

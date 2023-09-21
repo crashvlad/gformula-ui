@@ -16,3 +16,11 @@ export const getAccessToken = (key: string) => {
 export const deleteAccessToken = (key: string) => {
   typeof window !== undefined && window.localStorage.removeItem(key);
 };
+
+export function shortenText(text: string, maxLength: number) {
+  if (text.length <= maxLength) {
+    return text;
+  } else {
+    return text.slice(0, maxLength) + '...';
+  }
+}
