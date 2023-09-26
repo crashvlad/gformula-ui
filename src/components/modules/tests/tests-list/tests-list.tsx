@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetTests } from '@/hooks/tests';
 import { cn } from '@/lib/utils';
-import { Plus, RefreshCcw } from 'lucide-react';
+import { Plus, RefreshCcw, SearchIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { TestAddDialogForm } from '../test-add-dialog-form';
 import { TestListCard } from './test-list-card';
@@ -45,13 +45,15 @@ export const TestsList = ({ status }) => {
   return (
     <div className="mt-6 space-y-8">
       <header className="flex flex-col justify-between w-full gap-4 md:flex-row">
-        <Input
-          placeholder={'Filtrar hipótesis...'}
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          className="max-w-xs"
-        />
-
+        <div className="w-full max-w-xs relative">
+          <Input
+            placeholder={'Filtrar hipótesis...'}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            className="w-full"
+          />
+          <SearchIcon className="absolute right-2 top-2 text-muted-foreground" />
+        </div>
         <div className="flex gap-3">
           <Button leftIcon={Plus} onClick={() => setIsOpenForm(true)}>
             Añadir
@@ -78,23 +80,20 @@ export const TestsList = ({ status }) => {
       </header>
 
       <section className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {isLoading && (
-          <>
-            {Array.from({ length: 8 }).map((_, i) => (
-              <Skeleton key={i} className="h-72" />
-            ))}
-          </>
-        )}
+        {isLoading &&
+          Array.from({ length: 8 }).map((_, i) => (
+            <Skeleton key={i} className="h-72" />
+          ))}
+
+        {!isLoading &&
+          filteredTests.length > 0 &&
+          filteredTests.map((t) => <TestListCard key={t.id} test={t} />)}
 
         {!isLoading && filteredTests.length === 0 && (
           <div className="flex items-center justify-center col-span-1 py-16 text-xl font-bold border rounded-lg h-72">
             No hay resultados
           </div>
         )}
-
-        {!isLoading &&
-          filteredTests.length > 0 &&
-          filteredTests.map((t) => <TestListCard key={t.id} test={t} />)}
       </section>
     </div>
   );

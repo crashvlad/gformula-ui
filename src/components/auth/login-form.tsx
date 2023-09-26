@@ -47,7 +47,6 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             </Label>
             <Input
               id="email"
-              placeholder="panic@disco.com"
               type="email"
               autoCapitalize="none"
               autoComplete="off"
@@ -67,7 +66,6 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             </Label>
             <Input
               id="password"
-              placeholder="********"
               type="password"
               autoCapitalize="none"
               autoComplete="off"

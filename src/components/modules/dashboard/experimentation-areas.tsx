@@ -1,4 +1,10 @@
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetAreaExperimentationData } from '@/hooks/dashboard';
 import { shortenText } from '@/lib/utils';
@@ -23,9 +29,18 @@ export const ExperimentationAreas = () => {
       {isLoading && <Skeleton className="h-72" />}
       {!isLoading && experimentationData.length > 0 && (
         <Card>
+          <CardHeader>
+            <CardTitle className="font-bold text-3xl">
+              Experimentación por áreas
+            </CardTitle>
+            <CardDescription>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
+              eveniet voluptatum sit?
+            </CardDescription>
+          </CardHeader>
           <CardContent className="p-6">
-            <ResponsiveContainer width="100%" aspect={3}>
-              <BarChart data={experimentationData}>
+            <ResponsiveContainer width="100%" height={350}>
+              <BarChart data={experimentationData} margin={{ left: -45 }}>
                 <XAxis
                   dataKey="name"
                   stroke="hsl(var(--muted-foreground))"
@@ -52,6 +67,7 @@ export const ExperimentationAreas = () => {
                 <Bar
                   dataKey="total"
                   fill="hsl(var(--primary))"
+                  barSize={85}
                   radius={[4, 4, 0, 0]}
                 />
                 <Legend

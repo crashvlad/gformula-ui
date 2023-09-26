@@ -52,29 +52,31 @@ export const TestListCard = ({ test }: { test: Experiment }) => {
 
   return (
     <Card className="flex flex-col h-full px-0">
-      <CardHeader>
-        <Link href={ROUTES.app_hypothesis_detail(test.id)}>
-          <CardTitle className="hover:underline">{test.name}</CardTitle>
-        </Link>
-        <CardDescription>
-          Creado por {test.creator.name}
-          <br />
-          <span className="flex gap-2 mt-2">
-            <CalendarDays className="w-4 h-4" />
-            hace {getFormatDateDistance(test.createdAt)}
-          </span>
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="">
-        <p className="line-clamp-3">{test.description}</p>
-      </CardContent>
+      <Link href={ROUTES.app_hypothesis_detail(test.id)} className="group">
+        <CardHeader>
+          <CardTitle className="group-hover:underline line-clamp-2 pb-2">
+            {test.name}
+          </CardTitle>
+          <CardDescription>
+            Creado por {test.creator.name}
+            <br />
+            <span className="flex gap-2 mt-2">
+              <CalendarDays className="w-4 h-4" />
+              hace {getFormatDateDistance(test.createdAt)}
+            </span>
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="">
+          <p className="line-clamp-3">{test.description}</p>
+        </CardContent>
+      </Link>
 
       <CardFooter className="flex justify-between mt-auto">
         <Badge variant="outline">
           {SALES_PROCESS_IMPACT_DICTIONARY[test.type]}
         </Badge>
 
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"

@@ -33,7 +33,7 @@ export const FeedbackForm = () => {
       { content: values.content },
       {
         onSuccess: () => {
-          form.reset();
+          form.reset({ content: '' });
         },
       }
     );

@@ -50,7 +50,7 @@ export const TestListFilterForm = () => {
     <Popover>
       <PopoverTrigger asChild>
         <Button className="ml-auto">
-          Filtros <FilterIcon className="w-4 h-4 ml-2" />
+          <FilterIcon className="w-4 h-4 mr-2" /> Filtros
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-96" align="end">

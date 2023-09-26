@@ -1,4 +1,10 @@
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetGrowthHealth } from '@/hooks/dashboard';
 import { shortenText } from '@/lib/utils';
@@ -23,9 +29,20 @@ export const GrowthHealth = () => {
       {isLoading && <Skeleton className="h-72" />}
       {!isLoading && experimentationData.length > 0 && (
         <Card>
-          <CardContent className="p-6">
-            <ResponsiveContainer width="100%" aspect={3}>
-              <BarChart data={experimentationData}>
+          <CardHeader>
+            <CardTitle className="font-bold text-3xl">Growth Health</CardTitle>
+            <CardDescription>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
+              eveniet voluptatum sit?
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="py-6">
+            <ResponsiveContainer
+              width="100%"
+              className={'flex items-center justify-center'}
+              height={300}
+            >
+              <BarChart data={experimentationData} margin={{ left: -45 }}>
                 <XAxis
                   dataKey="name"
                   stroke="hsl(var(--muted-foreground))"
@@ -50,6 +67,7 @@ export const GrowthHealth = () => {
                   stroke="hsl(var(--muted))"
                 />
                 <Bar
+                  barSize={85}
                   dataKey="total"
                   fill="hsl(var(--primary))"
                   radius={[4, 4, 0, 0]}
