@@ -1,6 +1,6 @@
 import { useMemo, type FC } from 'react';
 import { Button } from '@/components/ui/button';
-import { BellIcon, ClockIcon } from 'lucide-react';
+import { BellIcon, ClockIcon, EyeIcon } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
@@ -13,6 +13,7 @@ import { getFormatDateDistance } from '@/lib/date';
 import { ROUTES } from '@/config/routes';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function NotificationPopover() {
   const { data, isLoading } = useGetActivities();
@@ -52,17 +53,21 @@ export function NotificationPopover() {
           <BellIcon className="w-5 h-5" />
         </Button>
       </PopoverTrigger>
-      {notifications.length > 0 && (
-        <PopoverContent align="end" className="p-0">
-          <ScrollArea className="h-96">
-            <div className="flex flex-col">
-              {notifications.map((n: any) => (
+      <PopoverContent align="end" className="p-0">
+        <ScrollArea className="h-96">
+          <div className="flex flex-col divide-y">
+            {isLoading &&
+              Array.from({ length: 6 })
+                .fill(true)
+                .map((_, i) => <Skeleton className="h-12" key={i} />)}
+            {notifications.length > 0 &&
+              notifications.map((n: any) => (
                 <NotificationItem notification={n} key={n.id} />
               ))}
-            </div>
-          </ScrollArea>
-        </PopoverContent>
-      )}
+            )
+          </div>
+        </ScrollArea>
+      </PopoverContent>
     </Popover>
   );
 }
@@ -91,13 +96,17 @@ function NotificationItem({ notification }: { notification: any }) {
         notification.isRead && 'bg-muted/50'
       )}
       onClick={handleClick}
+      aria-disabled={isLoading}
     >
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 relative">
         {notification.name}
-        <span className="flex items-center gap-3">
+        <span className="flex items-center gap-3 font-mono">
           <ClockIcon className="w-4 h-4" />
           hace {getFormatDateDistance(notification.createdAt)}
         </span>
+        {!notification.isRead && (
+          <EyeIcon className="absolute bottom-0 right-0" />
+        )}
       </div>
     </Link>
   );

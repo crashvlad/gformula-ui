@@ -49,7 +49,7 @@ export function TestDetail() {
         <Card>
           <CardHeader>
             <CardTitle>{data.name}</CardTitle>
-            <CardDescription>
+            <CardDescription className="font-mono">
               Creado por {data.creator.name} • hace{' '}
               {getFormatDateDistance(data.createdAt ?? '')}
             </CardDescription>

@@ -3,12 +3,22 @@ import { Objective } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { ObjectivesTableActions } from './objectives-table-actions';
 import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
+import { ROUTES } from '@/config/routes';
 
 export const columns: ColumnDef<Objective>[] = [
   {
     accessorKey: 'name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Nombre" />
+    ),
+    cell: ({ row }) => (
+      <Link
+        className="flex w-full"
+        href={ROUTES.app_objectives_detail(row.original.id)}
+      >
+        {row.original.name}
+      </Link>
     ),
   },
   {

@@ -59,7 +59,7 @@ export const FeedbackForm = () => {
                   <FormControl>
                     <Textarea
                       placeholder="Déjanos tu feedback"
-                      className="resize-none"
+                      className="resize-none font-mono"
                       {...field}
                     />
                   </FormControl>
