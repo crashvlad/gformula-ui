@@ -80,7 +80,7 @@ export function AreaDialogForm({
 
   return (
     <>
-      <DialogContent className="sm:max-w-[650px] overflow-y-scroll max-h-[85vh]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Añadir</DialogTitle>
           <DialogDescription>

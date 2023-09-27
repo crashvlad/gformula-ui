@@ -85,7 +85,7 @@ export function MetricDialogForm({
 
   return (
     <>
-      <DialogContent className="sm:max-w-[650px] overflow-y-scroll max-h-[85vh]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Añadir</DialogTitle>
           <DialogDescription>Añade nuevas métricas</DialogDescription>

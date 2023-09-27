@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form';
 
 import { User } from '@/types';
 import * as z from 'zod';
+import { useUpdateUserPassword } from '@/hooks/users';
 
 export const useFormUpdateSchema = z.object({
   password: z.string().min(2).max(50),
@@ -36,19 +37,21 @@ export function UserUpdatePassword({
     defaultValues: { password: '' },
   });
 
+  const updateMutation = useUpdateUserPassword();
+
   function onSubmitUpdate(values: z.infer<typeof useFormUpdateSchema>) {
-    // updateMutation.mutate(
-    //   { ...values, id: user?.id },
-    //   {
-    //     onSuccess: () => {
-    //       afterMutation();
-    //       form.reset();
-    //     },
-    //   }
-    // );
+    updateMutation.mutate(
+      { ...values, id: user?.id },
+      {
+        onSuccess: () => {
+          afterMutation();
+          form.reset();
+        },
+      }
+    );
   }
 
-  const loading = form.formState.isSubmitting;
+  const loading = form.formState.isSubmitting || updateMutation.isLoading;
 
   return (
     <>

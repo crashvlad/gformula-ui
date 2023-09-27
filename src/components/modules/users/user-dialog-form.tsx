@@ -107,7 +107,7 @@ export function UserDialogForm({
 
   return (
     <>
-      <DialogContent className="sm:max-w-[750px] overflow-y-scroll max-h-[85vh]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Añadir Usuario</DialogTitle>
         </DialogHeader>

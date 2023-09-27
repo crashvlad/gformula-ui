@@ -107,7 +107,7 @@ export function ObjectiveDialogForm({
 
   return (
     <>
-      <DialogContent className="sm:max-w-[800px] overflow-y-scroll max-h-[85vh]">
+      <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Añadir Objetivo</DialogTitle>
           <DialogDescription>Añade nuevos objetivos</DialogDescription>

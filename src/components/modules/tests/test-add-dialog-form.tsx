@@ -6,9 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import {
   Form,
   FormControl,
@@ -18,9 +15,10 @@ import {
   FormMessage,
   FormTooltipInfo,
 } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
-import * as z from 'zod';
-import { HelpCircle, InfoIcon } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -28,20 +26,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SALES_PROCESS_IMPACT_OPTIONS } from '@/lib/contants';
-import { useGetAreas } from '@/hooks/areas';
-import { useGetObjectives } from '@/hooks';
 import { Textarea } from '@/components/ui/textarea';
-import { useAddTest, useUpdateTest } from '@/hooks/tests';
-import { Experiment } from '@/types';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/routes';
+import { useGetObjectives } from '@/hooks';
+import { useGetAreas } from '@/hooks/areas';
+import { useAddTest, useUpdateTest } from '@/hooks/tests';
+import { SALES_PROCESS_IMPACT_OPTIONS } from '@/lib/contants';
+import { Experiment } from '@/types';
+import { useRouter } from 'next/router';
+import * as z from 'zod';
 import { TABS_LIST } from '.';
 
 const testAddForm = z.object({
@@ -138,7 +131,7 @@ export function TestAddDialogForm({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[800px] overflow-y-scroll max-h-[85vh]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Crear nueva Hipótesis</DialogTitle>
         </DialogHeader>
