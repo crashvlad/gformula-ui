@@ -21,6 +21,7 @@ import { User } from '@/types';
 import { UserDialogForm } from '../user-dialog-form';
 import { DeleteDialog } from '@/components/ui/delete-dialog';
 import { UserUpdatePassword } from '../user-update-password';
+import { ACCESS_LEVEL } from '@/lib/contants';
 
 interface UserTableActionsProps {
   user: User;
@@ -37,9 +38,12 @@ export function UserTableActions({ user }: UserTableActionsProps) {
         <DropdownMenuItem onSelect={() => setOpen(true)}>
           Editar
         </DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => setOpenPassword(true)}>
-          Editar Contraseña
-        </DropdownMenuItem>
+
+        {user.accessLevel === ACCESS_LEVEL.ACCOUNT_EDITOR && (
+          <DropdownMenuItem onSelect={() => setOpenPassword(true)}>
+            Editar Contraseña
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuSeparator />
 

@@ -5,6 +5,7 @@ import { ObjectivesTableActions } from './objectives-table-actions';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { ROUTES } from '@/config/routes';
+import { SALES_PROCESS_IMPACT_DICTIONARY } from '@/lib/contants';
 
 export const columns: ColumnDef<Objective>[] = [
   {
@@ -25,7 +26,7 @@ export const columns: ColumnDef<Objective>[] = [
     header: 'Proceso de Venta',
     cell: ({ row }) => (
       <Badge className="" variant={'outline'}>
-        {row.original.type}
+        {SALES_PROCESS_IMPACT_DICTIONARY[row.original.type]}
       </Badge>
     ),
   },
