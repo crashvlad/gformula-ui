@@ -61,22 +61,14 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative pt-20 overflow-hidden bg-blue-600 pb-28 sm:py-32"
+      className="relative pt-20 overflow-hidden pb-28 sm:py-32"
     >
-      <Image
-        className="absolute left-1/2 top-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-        src={backgroundImage}
-        alt=""
-        width={2245}
-        height={1636}
-        unoptimized
-      />
-      <Container className="relative">
+      <Container>
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-          <h2 className="text-3xl tracking-tight text-white font-display sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl tracking-tight text-foreground font-display sm:text-4xl md:text-5xl">
             Everything you need to run your books.
           </h2>
-          <p className="mt-6 text-lg tracking-tight text-blue-100">
+          <p className="mt-6 text-lg tracking-tight text-primary">
             Well everything you need if you aren’t that picky about minor
             details like tax compliance.
           </p>
@@ -105,8 +97,8 @@ export function PrimaryFeatures() {
                           className={clsx(
                             'font-display text-lg ui-not-focus-visible:outline-none',
                             selectedIndex === featureIndex
-                              ? 'text-blue-600 lg:text-white'
-                              : 'text-blue-100 hover:text-white lg:text-white'
+                              ? 'text-primary lg:text-foreground'
+                              : 'text-foreground hover:text-foreground lg:text-foreground'
                           )}
                         >
                           <span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />
@@ -117,8 +109,8 @@ export function PrimaryFeatures() {
                         className={clsx(
                           'mt-2 hidden text-sm lg:block',
                           selectedIndex === featureIndex
-                            ? 'text-white'
-                            : 'text-blue-100 group-hover:text-white'
+                            ? 'text-foreground'
+                            : 'text-foreground group-hover:text-foreground'
                         )}
                       >
                         {feature.description}
@@ -131,12 +123,12 @@ export function PrimaryFeatures() {
                 {features.map((feature) => (
                   <Tab.Panel key={feature.title} unmount={false}>
                     <div className="relative sm:px-6 lg:hidden">
-                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
-                      <p className="relative max-w-2xl mx-auto text-base text-white sm:text-center">
+                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-white/20 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
+                      <p className="relative max-w-2xl mx-auto text-base text-foreground sm:text-center">
                         {feature.description}
                       </p>
                     </div>
-                    <div className="mt-10 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
+                    <div className="mt-10 w-[45rem] overflow-hidden rounded-xl  shadow-xl shadow-primary/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
                       <Image
                         className="w-full"
                         src={feature.image}

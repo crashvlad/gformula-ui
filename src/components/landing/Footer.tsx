@@ -3,13 +3,14 @@ import Link from 'next/link';
 import { Container } from '@/components/landing/Container';
 import { Logo } from '@/components/landing/Logo';
 import { NavLink } from '@/components/landing/NavLink';
+import { Icons } from '../icons';
 
 export function Footer() {
   return (
-    <footer className="bg-slate-50">
+    <footer>
       <Container>
-        <div className="py-16">
-          <Logo className="w-auto h-10 mx-auto" />
+        <div className="py-16 rounded-3xl bg-card">
+          <Icons.logo className="w-auto h-10 mx-auto" />
           <nav className="mt-10 text-sm" aria-label="quick links">
             <div className="flex justify-center -my-1 gap-x-6">
               <NavLink href="#features">Características</NavLink>
@@ -18,7 +19,7 @@ export function Footer() {
             </div>
           </nav>
         </div>
-        <div className="flex flex-col items-center py-10 border-t border-slate-400/10 sm:flex-row-reverse sm:justify-between">
+        <div className="flex flex-col items-center py-10 sm:flex-row-reverse sm:justify-between">
           <div className="flex gap-x-6">
             <Link
               href="https://twitter.com"

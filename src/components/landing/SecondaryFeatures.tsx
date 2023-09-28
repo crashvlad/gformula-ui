@@ -107,7 +107,7 @@ function Feature({ feature, isActive, className, ...props }) {
       <div
         className={clsx(
           'w-9 rounded-lg',
-          isActive ? 'bg-blue-600' : 'bg-slate-500'
+          isActive ? 'bg-primary' : 'bg-slate-900'
         )}
       >
         <svg aria-hidden="true" className="h-9 w-9" fill="none">
@@ -117,15 +117,17 @@ function Feature({ feature, isActive, className, ...props }) {
       <h3
         className={clsx(
           'mt-6 text-sm font-medium',
-          isActive ? 'text-blue-600' : 'text-slate-600'
+          isActive ? 'text-primary' : 'text-muted-foreground'
         )}
       >
         {feature.name}
       </h3>
-      <p className="mt-2 text-xl font-display text-slate-900">
+      <p className="mt-2 text-xl font-display text-muted-foreground">
         {feature.summary}
       </p>
-      <p className="mt-4 text-sm text-slate-600">{feature.description}</p>
+      <p className="mt-4 text-sm text-muted-foreground">
+        {feature.description}
+      </p>
     </div>
   );
 }
@@ -137,8 +139,8 @@ function FeaturesMobile() {
         <div key={feature.name}>
           <Feature feature={feature} className="max-w-2xl mx-auto" isActive />
           <div className="relative pb-10 mt-10">
-            <div className="absolute bottom-0 -inset-x-4 top-8 bg-slate-200 sm:-inset-x-6" />
-            <div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
+            <div className="absolute bottom-0 -inset-x-4 top-8 bg-primary/50 sm:-inset-x-6" />
+            <div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl  shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
               <Image
                 className="w-full"
                 src={feature.image}
@@ -176,7 +178,7 @@ function FeaturesDesktop() {
               />
             ))}
           </Tab.List>
-          <Tab.Panels className="relative py-16 mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 xl:px-16">
+          <Tab.Panels className="relative py-16 mt-20 overflow-hidden rounded-4xl bg-card rounded-xl px-14 xl:px-16">
             <div className="flex -mx-5">
               {features.map((feature, featureIndex) => (
                 <Tab.Panel
@@ -189,7 +191,7 @@ function FeaturesDesktop() {
                   style={{ transform: `translateX(-${selectedIndex * 100}%)` }}
                   aria-hidden={featureIndex !== selectedIndex}
                 >
-                  <div className="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
+                  <div className="w-[52.75rem] overflow-hidden rounded-xl bg-foreground shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
                     <Image
                       className="w-full"
                       src={feature.image}
@@ -217,10 +219,10 @@ export function SecondaryFeatures() {
     >
       <Container>
         <div className="max-w-2xl mx-auto md:text-center">
-          <h2 className="text-3xl tracking-tight font-display text-slate-900 sm:text-4xl">
+          <h2 className="text-3xl tracking-tight font-display sm:text-4xl">
             Simplify everyday business tasks.
           </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">
+          <p className="mt-4 text-lg tracking-tight text-primary">
             Because you’d probably be a little confused if we suggested you
             complicate your everyday business tasks instead.
           </p>

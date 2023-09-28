@@ -5,14 +5,20 @@ import Link from 'next/link';
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 
-import { Button } from '@/components/landing/Button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Container } from '@/components/landing/Container';
 import { Logo } from '@/components/landing/Logo';
 import { NavLink } from '@/components/landing/NavLink';
+import { cn } from '@/lib/utils';
+import { Icons } from '../icons';
 
 function MobileNavLink({ href, children }) {
   return (
-    <Popover.Button as={Link} href={href} className="block w-full p-2">
+    <Popover.Button
+      as={Link}
+      href={href}
+      className="block w-full p-2 text-muted-foreground"
+    >
       {children}
     </Popover.Button>
   );
@@ -22,7 +28,7 @@ function MobileNavIcon({ open }) {
   return (
     <svg
       aria-hidden="true"
-      className="h-3.5 w-3.5 overflow-visible stroke-slate-700"
+      className="h-3.5 w-3.5 overflow-visible stroke-muted-foreground"
       fill="none"
       strokeWidth={2}
       strokeLinecap="round"
@@ -64,7 +70,7 @@ function MobileNavigation() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Popover.Overlay className="fixed inset-0 bg-slate-300/50" />
+          <Popover.Overlay className="fixed inset-0 bg-background/80" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -77,7 +83,7 @@ function MobileNavigation() {
         >
           <Popover.Panel
             as="div"
-            className="absolute inset-x-0 flex flex-col p-4 mt-4 text-lg tracking-tight origin-top bg-white shadow-xl top-full rounded-2xl text-slate-900 ring-1 ring-slate-900/5"
+            className="absolute inset-x-0 flex flex-col p-4 mt-4 text-lg tracking-tight origin-top shadow-xl bg-popover top-full rounded-2xl ring-1 ring-slate-900/5"
           >
             <MobileNavLink href="#features">Características</MobileNavLink>
             <MobileNavLink href="#testimonials">Testimonios</MobileNavLink>
@@ -93,12 +99,12 @@ function MobileNavigation() {
 
 export function Header() {
   return (
-    <header className="py-10 bg-white">
+    <header className="py-10 bg-background">
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
             <Link href="#" aria-label="Home">
-              <Logo className="w-auto h-10" />
+              <Icons.logo className="w-auto h-10 " />
             </Link>
             <div className="hidden md:flex md:gap-x-6">
               <NavLink href="#features">Características</NavLink>
@@ -107,9 +113,15 @@ export function Header() {
             </div>
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
-            <Button href="/login" color="blue" className="hidden md:block">
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants(),
+                'hidden md:block shadow-sm hover:scale-105 transition-all duration-100 shadow-primary'
+              )}
+            >
               Inicia Sesión
-            </Button>
+            </Link>
             <div className="-mr-1 md:hidden">
               <MobileNavigation />
             </div>

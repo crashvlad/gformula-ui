@@ -12,7 +12,7 @@ export default function LandingPage() {
   return (
     <>
       <Header />
-      <main className="bg-white">
+      <main className="bg-background">
         <Hero />
         <PrimaryFeatures />
         <SecondaryFeatures />

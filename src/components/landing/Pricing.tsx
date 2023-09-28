@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Button } from '@/components/landing/Button';
+import { Button } from '@/components/ui/button';
 import { Container } from '@/components/landing/Container';
 
 function SwirlyDoodle({ className }) {
@@ -51,40 +51,43 @@ function Plan({ name, price, description, href, features, featured = false }) {
     <section
       className={clsx(
         'flex flex-col rounded-3xl px-6 sm:px-8',
-        featured ? 'order-first bg-blue-600 py-8 lg:order-none' : 'lg:py-8'
+        featured ? 'order-first bg-primary/10 py-8 lg:order-none' : 'lg:py-8'
       )}
     >
-      <h3 className="mt-5 text-lg text-white font-display">{name}</h3>
+      <h3 className="mt-5 text-lg font-display">{name}</h3>
       <p
         className={clsx(
           'mt-2 text-base',
-          featured ? 'text-white' : 'text-slate-400'
+          featured ? 'text-muted-foreground' : 'text-muted-foreground'
         )}
       >
         {description}
       </p>
-      <p className="order-first text-5xl font-light tracking-tight text-white font-display">
+      <p className="order-first text-5xl font-light tracking-tight font-display">
         {price}
       </p>
       <ul
         role="list"
         className={clsx(
           'order-last mt-10 flex flex-col gap-y-3 text-sm',
-          featured ? 'text-white' : 'text-slate-200'
+          featured ? 'text-muted-foreground' : 'text-slate-200'
         )}
       >
         {features.map((feature) => (
           <li key={feature} className="flex">
-            <CheckIcon className={featured ? 'text-white' : 'text-slate-400'} />
+            <CheckIcon
+              className={
+                featured ? 'text-muted-foreground' : 'text-muted-foreground'
+              }
+            />
             <span className="ml-4">{feature}</span>
           </li>
         ))}
       </ul>
       <Button
-        href={href}
-        variant={featured ? 'solid' : 'outline'}
+        variant={featured ? 'secondary' : 'outline'}
         color="white"
-        className="mt-8"
+        className="mt-8 rounded-full"
         aria-label={`Get started with the ${name} plan for ${price}`}
       >
         Get started
@@ -95,21 +98,17 @@ function Plan({ name, price, description, href, features, featured = false }) {
 
 export function Pricing() {
   return (
-    <section
-      id="pricing"
-      aria-label="Pricing"
-      className="py-20 bg-slate-900 sm:py-32"
-    >
+    <section id="pricing" aria-label="Pricing" className="py-20 sm:py-32">
       <Container>
         <div className="md:text-center">
-          <h2 className="text-3xl tracking-tight text-white font-display sm:text-4xl">
+          <h2 className="text-3xl tracking-tight text-primary font-display sm:text-4xl">
             <span className="relative whitespace-nowrap">
-              <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-blue-400" />
+              <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-primary/10" />
               <span className="relative">Simple pricing,</span>
             </span>{' '}
             for everyone.
           </h2>
-          <p className="mt-4 text-lg text-slate-400">
+          <p className="mt-4 text-lg text-muted-foreground">
             It doesn’t matter what size your business is, our software won’t
             work well for you.
           </p>
