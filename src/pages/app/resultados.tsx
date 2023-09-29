@@ -6,7 +6,6 @@ export default function ResultAppPage() {
   return (
     <Layout>
       <PageHeading title="Resultados" description="Descripcion de prueba" />
-
       <TestsListResult />
     </Layout>
   );

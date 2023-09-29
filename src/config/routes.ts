@@ -1,6 +1,7 @@
 export const ROUTES = {
   login: '/login',
   faq: '/app/preguntas-frecuentes',
+  profile: '/app/perfil',
   app_dashboard: '/app/panel',
   app_settings: '/app/configuracion',
   app_home: '/app/inicio',

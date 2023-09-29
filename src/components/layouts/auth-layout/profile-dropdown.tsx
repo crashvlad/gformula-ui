@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 import type { FC } from 'react';
-import { LayoutPanelLeft, Lightbulb, Settings } from 'lucide-react';
+import { LayoutPanelLeft, Lightbulb, Settings, UserIcon } from 'lucide-react';
 import { Icons } from '@/components/icons';
 import { ROUTES } from '@/config/routes';
 import { useUser } from '@/components/context/AuthContext';
@@ -42,6 +42,13 @@ export const ProfileDropdown: FC<ProfileDropdownProps> = ({}) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          <Link href={ROUTES.profile}>
+            <DropdownMenuItem>
+              <UserIcon className="w-4 h-4 mr-2" />
+              Ver Perfil
+            </DropdownMenuItem>
+          </Link>
+          <DropdownMenuSeparator />
           <Link href={ROUTES.app_hypothesis}>
             <DropdownMenuItem>
               <Lightbulb className="w-4 h-4 mr-2" />

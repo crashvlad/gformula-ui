@@ -78,7 +78,7 @@ export const CrossfunctionalExperimentationChart = ({
         },
       },
     });
-  }, []);
+  }, [data, labels]);
 
   return <canvas id="chart-area" />;
 };

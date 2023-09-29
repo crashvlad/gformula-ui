@@ -22,7 +22,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 
-enum DhasboardTabs {
+enum DHASBOARDTABS {
   EXPERIMENTATION = 'cross-experimentation',
   INTERACTION = 'cross-interaction',
   OBJECTIVE = 'exp-objective',
@@ -51,19 +51,19 @@ export default function DashboardAppPage() {
               value={activeTab}
               onValueChange={handleTabChange}
             >
-              <DropdownMenuRadioItem value="cross-experimentation">
+              <DropdownMenuRadioItem value={DHASBOARDTABS.EXPERIMENTATION}>
                 Experimentación Cross Funcional
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="cross-interaction">
+              <DropdownMenuRadioItem value={DHASBOARDTABS.INTERACTION}>
                 Interacción Cross Funcional
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="exp-objective">
+              <DropdownMenuRadioItem value={DHASBOARDTABS.OBJECTIVE}>
                 Experimentación por Objetivo
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="exp-area">
+              <DropdownMenuRadioItem value={DHASBOARDTABS.AREA}>
                 Experimentación por Área
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="growth-health">
+              <DropdownMenuRadioItem value={DHASBOARDTABS.HEALTH}>
                 Growth Health
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
@@ -76,19 +76,19 @@ export default function DashboardAppPage() {
         value={activeTab}
         onValueChange={handleTabChange}
       >
-        <TabsContent value="cross-experimentation">
+        <TabsContent value={DHASBOARDTABS.EXPERIMENTATION}>
           <CrossfunctionalExperimentation />
         </TabsContent>
-        <TabsContent value="cross-interaction">
+        <TabsContent value={DHASBOARDTABS.INTERACTION}>
           <CrossfunctionalInteraction />
         </TabsContent>
-        <TabsContent value="exp-objective">
+        <TabsContent value={DHASBOARDTABS.OBJECTIVE}>
           <ExperimentationObjective />
         </TabsContent>
-        <TabsContent value="exp-area">
+        <TabsContent value={DHASBOARDTABS.AREA}>
           <ExperimentationAreas />
         </TabsContent>
-        <TabsContent value="growth-health">
+        <TabsContent value={DHASBOARDTABS.HEALTH}>
           <GrowthHealth />
         </TabsContent>
       </Tabs>
