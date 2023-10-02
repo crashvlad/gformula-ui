@@ -18,16 +18,12 @@ async function updateUserPassword(data: any) {
 }
 
 export function useUpdateUserPassword() {
-  const clientQuery = useQueryClient();
   return useMutation(updateUserPassword, {
     onError: () => {
       toast({ title: 'Algo ha salido mal!' });
     },
     onSuccess: (data) => {
       toast({ title: `Usuario ${data.data.name} editado!` });
-    },
-    onSettled: () => {
-      clientQuery.invalidateQueries({ queryKey: ['users'] });
     },
   });
 }

@@ -64,7 +64,6 @@ export function NotificationPopover() {
               notifications.map((n: any) => (
                 <NotificationItem notification={n} key={n.id} />
               ))}
-            )
           </div>
         </ScrollArea>
       </PopoverContent>
@@ -98,7 +97,7 @@ function NotificationItem({ notification }: { notification: any }) {
       onClick={handleClick}
       aria-disabled={isLoading}
     >
-      <div className="flex flex-col gap-1 relative">
+      <div className="relative flex flex-col gap-1">
         {notification.name}
         <span className="flex items-center gap-3 font-mono">
           <ClockIcon className="w-4 h-4" />

@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { UserProfilePersonalForm } from './user-profile-personal-form';
 import { UserProfileUpdatePasswordForm } from './user-profile-update-password';
+import { useUser } from '@/components/context/AuthContext';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function InfoColumn({
   title,
@@ -20,15 +22,16 @@ function InfoColumn({
 export const UserProfile = () => {
   return (
     <div className="divide-y divide-white/5">
-      <div className="grid py-6 grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-3">
+      <div className="grid grid-cols-1 px-4 py-16 max-w-7xl gap-x-8 gap-y-10 sm:px-6 md:grid-cols-3 lg:px-8">
         <InfoColumn
           title="Información Personal"
           description="Use una dirección permanente donde pueda recibir correo."
         />
+
         <UserProfilePersonalForm />
       </div>
 
-      <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+      <div className="grid grid-cols-1 px-4 py-16 max-w-7xl gap-x-8 gap-y-10 sm:px-6 md:grid-cols-3 lg:px-8">
         <InfoColumn
           title="Cambiar contraseña"
           description="Actualiza tu contraseña asociada a tu cuenta."
@@ -37,7 +40,7 @@ export const UserProfile = () => {
         <UserProfileUpdatePasswordForm />
       </div>
 
-      <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+      <div className="grid grid-cols-1 px-4 py-16 max-w-7xl gap-x-8 gap-y-10 sm:px-6 md:grid-cols-3 lg:px-8">
         <InfoColumn
           title="Eliminar cuenta"
           description="¿Ya no deseas utilizar nuestro servicio? Puedes eliminar tu cuenta
