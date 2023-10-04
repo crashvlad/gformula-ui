@@ -53,7 +53,7 @@ export const UserProfilePersonalForm = () => {
   }, [defaultValues]);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    const { targetArea, job, accessLevel, ...restValues } = data;
+    const { targetArea, accessLevel, ...restValues } = data;
 
     mutate({ id: user?.id, ...restValues });
   }
@@ -111,6 +111,22 @@ export const UserProfilePersonalForm = () => {
               )}
             />
           </div>
+          <div className="col-span-full">
+            <FormField
+              control={form.control}
+              name="job"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Puesto de tabajo</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="bg-card" autoComplete="off" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <div className="col-span-3">
             <FormField
               control={form.control}
@@ -138,26 +154,6 @@ export const UserProfilePersonalForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Rol</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled
-                      className="bg-card"
-                      autoComplete="off"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="col-span-full">
-            <FormField
-              control={form.control}
-              name="job"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Puesto de tabajo</FormLabel>
                   <FormControl>
                     <Input
                       {...field}

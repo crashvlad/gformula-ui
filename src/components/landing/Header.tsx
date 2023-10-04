@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Container } from '@/components/landing/Container';
 import { Logo } from '@/components/landing/Logo';
 import { NavLink } from '@/components/landing/NavLink';
@@ -88,6 +88,7 @@ function MobileNavigation() {
             <MobileNavLink href="#features">Características</MobileNavLink>
             <MobileNavLink href="#testimonials">Testimonios</MobileNavLink>
             <MobileNavLink href="#pricing">Precio</MobileNavLink>
+            <MobileNavLink href="/blog">Blog</MobileNavLink>
             <hr className="m-2 border-slate-300/40" />
             <MobileNavLink href="/login">Inicia Sesión</MobileNavLink>
           </Popover.Panel>
@@ -101,23 +102,25 @@ export function Header() {
   return (
     <header className="py-10 bg-background">
       <Container>
-        <nav className="relative z-50 flex justify-between">
-          <div className="flex items-center md:gap-x-12">
-            <Link href="#" aria-label="Home">
+        <nav className="relative z-50 flex items-center justify-between">
+          <div className="flex items-center justify-center">
+            <Link href="/" aria-label="Home">
               <Icons.logo className="w-auto h-10 " />
             </Link>
-            <div className="hidden md:flex md:gap-x-6">
-              <NavLink href="#features">Características</NavLink>
-              <NavLink href="#testimonials">Testimonios</NavLink>
-              <NavLink href="#pricing">Precio</NavLink>
-            </div>
+          </div>
+
+          <div className="justify-center hidden md:flex md:gap-x-6">
+            <NavLink href="#features">Características</NavLink>
+            <NavLink href="#testimonials">Testimonios</NavLink>
+            <NavLink href="#pricing">Precio</NavLink>
+            <NavLink href="/blog">Blog</NavLink>
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
             <Link
               href="/login"
               className={cn(
                 buttonVariants(),
-                'hidden md:block shadow-sm hover:scale-105 transition-all duration-100 shadow-primary'
+                'hidden md:inline-flex shadow-sm hover:scale-105 transition-all duration-100 shadow-primary'
               )}
             >
               Inicia Sesión
