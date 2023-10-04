@@ -18,7 +18,7 @@ export function SupportPopover() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button className="rounded-full w-14 h-14">
+        <Button className="transition-all duration-200 rounded-full w-14 h-14 hover:scale-105">
           {open ? (
             <X className="w-8 h-8" />
           ) : (
@@ -32,16 +32,16 @@ export function SupportPopover() {
         alignOffset={25}
         sideOffset={15}
       >
-        <div className="px-3 py-6 bg-primary/50 rounded-t-md">
-          <h2 className="flex gap-1 text-lg font-extrabold text-muted-foreground">
-            <Image
+        <div className="px-3 py-6 bg-primary rounded-t-md">
+          <h2 className="flex gap-1 text-lg font-extrabold text-muted">
+            {/* <Image
               className=""
               src={logoSimple}
               alt=""
               width={25}
               height={25}
               unoptimized
-            />
+            /> */}
             Como podemos ayudarte?
           </h2>
         </div>

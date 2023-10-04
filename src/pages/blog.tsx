@@ -1,4 +1,4 @@
-import { PostCard } from '@/components/blog/post-card';
+import { PostCard } from '@/components/landing/PostCard';
 import { Footer } from '@/components/landing/Footer';
 import { Header } from '@/components/landing/Header';
 import { allPosts } from 'contentlayer/generated';

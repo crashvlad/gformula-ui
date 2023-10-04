@@ -11,12 +11,15 @@ import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/icons';
 import { useLogin } from '@/hooks';
 import { IS_PRODUCTION } from '@/lib/contants';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 type FormData = z.infer<typeof userAuthSchema>;
 
 export function LoginForm({ className, ...props }: LoginFormProps) {
+  const [showPassword, setShowPassword] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -64,15 +67,30 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             <Label className="" htmlFor="password">
               Contraseña
             </Label>
-            <Input
-              id="password"
-              type="password"
-              autoCapitalize="none"
-              autoComplete="off"
-              autoCorrect="off"
-              disabled={loading}
-              {...register('password')}
-            />
+
+            <div className="relative">
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                autoCapitalize="none"
+                autoComplete="off"
+                autoCorrect="off"
+                disabled={loading}
+                {...register('password')}
+              />
+              {showPassword ? (
+                <EyeOffIcon
+                  onClick={() => setShowPassword(false)}
+                  className="absolute h-5 cursor-pointer right-2 top-3 text-muted-foreground hover:text-muted"
+                />
+              ) : (
+                <EyeIcon
+                  onClick={() => setShowPassword(true)}
+                  className="absolute h-5 cursor-pointer right-2 top-3 text-muted-foreground hover:text-muted"
+                />
+              )}
+            </div>
+
             {errors?.password && (
               <p className="px-1 text-xs text-red-600">
                 {errors.password.message}

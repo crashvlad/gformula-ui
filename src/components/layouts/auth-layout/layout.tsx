@@ -17,12 +17,12 @@ export function Layout({ children }: LayoutProps) {
 
         <div className="flex h-full overflow-hidden bg-background lg:min-h-[calc(100vh-3.5rem)]">
           <Sidebar />
-          <main className="flex-1  min-h-screen px-6 py-3 overflow-hidden overflow-y-auto lg:ml-56">
+          <main className="flex-1 min-h-screen px-6 py-3 overflow-hidden overflow-y-auto lg:ml-56">
             {children}
           </main>
         </div>
 
-        <div className="fixed flex flex-col bottom-2 right-2">
+        <div className="fixed flex flex-col bottom-5 right-2">
           <SupportPopover />
         </div>
       </div>
